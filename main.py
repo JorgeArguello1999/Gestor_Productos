@@ -1,12 +1,12 @@
+import tkinter
 from tkinter import ttk
 from tkinter import *
 
-
-class Product:
-
+class Producto:
     def __init__(self, window):
         self.wind= window
-        self.wind.title('Cuaderno Notas')
+        self.wind.title('Sistema de Registro')
+
 
         #Creamos un Frame
         frame= LabelFrame(self.wind, text='Datos')
@@ -25,18 +25,28 @@ class Product:
         self.name.grid(
                 row= 1,
                 column= 1)
-        
-        #Botones
-        ttk.Button(text= 'Comprobar').grid(
-                row= 5,
-                column= 1,
+
+        #Entrada de Contraseña 
+        Label(frame, text='Contraseña: ').grid(
+                row= 2,
+                column= 0)
+        self.name= Entry(frame)
+        self.name.focus()
+        self.name.grid(
+                row= 2,
+                column= 1)
+
+        #Salvar datos
+        ttk.Button(frame, text='Registro', command=self.wind.destroy ).grid(
+                row= 3,
+                columnspan= 2,
                 sticky= W+E)
 
-    def user(self, window):
-        pass
+        def comprobador():
+            pass
 
 if __name__=='__main__':
     window= Tk()
-    aplicacion= Product(window)
+    aplicacion= Producto(window)
     window.mainloop()
  
