@@ -2,28 +2,41 @@
 #!/usr/bin/python
 import mariadb
 
-conn = mariadb.connect(
-    user="root",
-    password="",
-    host="localhost",
-    database="aplicacion")
+class conexion:
+    #Verificacion de usuario
+    def __init__(self, user_name, password):
 
-cur = conn.cursor()
+        self.conn = mariadb.connect(
+            user="root",
+            password="",
+            host="localhost",
+            database="aplicacion"
+            )
 
-#retrieving information
-some_name = "Georgi"
-cur.execute("SELECT nombre FROM usuarios WHERE nombre=?", (some_name,))
+        cur = self.conn.cursor()
 
-for nombre in cur:
-    print(f"First name: {nombre}")
+        #Reciviendo informacion y validando
+        if user_name != None and password != None:
 
-#insert information
-try:
-    cur.execute("INSERT INTO usuarios (nombre,clave) VALUES (?, ?)", ("Maria","DB"))
-except mariadb.Error as e:
-    print(f"Error: {e}")
+            cur.execute("SELECT nombre FROM usuarios WHERE nombre=?", (user_name,))
+            for nombre in cur:
+                print(f"Tu usuario es correcto")
 
-conn.commit()
-print(f"Last Inserted ID: {cur.lastrowid}")
+            cur.execute("SELECT clave FROM usuarios WHERE clave=?", (password,))    
+            for clave in cur:
+                print(f"Tu usuario es correcto")
 
-conn.close()
+        self.conn.close()
+
+    def insert(self):
+        pass
+        """
+        #insert information
+        try:
+            cur.execute("INSERT INTO usuarios (nombre,clave) VALUES (?, ?)", ("Maria","DB"))
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+        conn.commit()
+        """
+
+conexion('Georgi', 'Ninguna')
