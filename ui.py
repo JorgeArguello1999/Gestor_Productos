@@ -1,3 +1,4 @@
+import db_connect
 import tkinter
 from tkinter import ttk
 from tkinter import *
@@ -6,7 +7,6 @@ class Producto:
     def __init__(self, window):
         self.wind= window
         self.wind.title('Sistema de Registro')
-
 
         #Creamos un Frame
         frame= LabelFrame(self.wind, text='Datos')
@@ -31,14 +31,20 @@ class Producto:
                 row= 2,
                 column= 0)
         self.name= Entry(frame)
-        self.name.focus()
         self.name.grid(
                 row= 2,
                 column= 1)
 
-        #Salvar datos
+        #Comprobar datos
         ttk.Button(frame, text='Registro', command=self.wind.destroy ).grid(
                 row= 3,
+                columnspan= 2,
+                sticky= W+E)
+
+
+        #Boton de Salir
+        ttk.Button(frame, text='Salir', command=self.wind.destroy ).grid(
+                row= 4,
                 columnspan= 2,
                 sticky= W+E)
 

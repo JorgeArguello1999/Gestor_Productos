@@ -4,8 +4,7 @@ import mariadb
 
 class conexion:
     #Verificacion de usuario
-    def __init__(self, user_name, password):
-
+    def __init__(self):
         self.conn = mariadb.connect(
             user="root",
             password="",
@@ -13,22 +12,27 @@ class conexion:
             database="aplicacion"
             )
 
+    def verificador(self, user_name, password):
         cur = self.conn.cursor()
 
         #Reciviendo informacion y validando
         if user_name != None and password != None:
-
-            cur.execute("SELECT nombre FROM usuarios WHERE nombre=?", (user_name,))
-            for nombre in cur:
-                print(f"Tu usuario es correcto")
-
             cur.execute("SELECT clave FROM usuarios WHERE clave=?", (password,))    
-            for clave in cur:
-                print(f"Tu usuario es correcto")
+            cur.execute("SELECT nombre FROM usuarios WHERE nombre=?", (user_name,))
+            print("\nTus credenciales son correctas\n")
 
         self.conn.close()
+        return True 
 
-    def insert(self):
+#Modificamos la tabla de productos
+class productos(conexion):
+
+    def listar(self):
+        cur = self.conn.cursor()
+        pass
+
+    def insertar(self):
+        cur = self.conn.cursor()
         pass
         """
         #insert information
@@ -39,4 +43,11 @@ class conexion:
         conn.commit()
         """
 
-conexion('Georgi', 'Ninguna')
+    def editar(self):
+        cur = self.conn.cursor()
+        pass
+
+    def eliminar(self):
+        cur = self.conn.cursor()
+        pass
+
