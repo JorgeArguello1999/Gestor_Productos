@@ -26,10 +26,11 @@ class conexion:
 
 #Modificamos la tabla de productos
 class productos(conexion):
-
     def listar(self):
         cur = self.conn.cursor()
-        pass
+        cur.execute("SELECT nombre FROM productos")
+        for nombre in cur:
+            return nombre
 
     def insertar(self):
         cur = self.conn.cursor()

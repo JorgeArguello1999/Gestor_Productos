@@ -13,25 +13,24 @@ class cli:
          
             if respuesta==True:
                 print("""
+                Elije la opcion a realizar...
                 1.- Listar articulos
                 2.- Insertar articulos
                 3.- Editar ariticulos
                 4.- Eliminar articulos
                         """)
-                self.entrada= input("Tu eleccion: ")
-                return self.entrada
+                entrada= int(input("Tu eleccion: "))
 
-    def selector(self):
-        pro= db_connect.productos()
+                pro= db_connect.productos()
 
-        if self.entrada==1:
-            pro.listar()
-        elif self.entrada==2:
-            pro.insertar()
-        elif self.entrada==3:
-            pro.editar()
-        elif self.entrada==4:
-            pro.eliminar()
+                if entrada==1:
+                    print(pro.listar())
+                elif entrada==2:
+                    pro.insertar()
+                elif entrada==3:
+                    pro.editar()
+                elif entrada==4:
+                    pro.eliminar()
 
 
 
