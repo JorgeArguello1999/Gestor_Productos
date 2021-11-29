@@ -26,7 +26,7 @@ class cli:
                 if entrada==1:
                     print(pro.listar())
                 elif entrada==2:
-                    pro.insertar()
+                    print(pro.insertar(3, 'Nombre', 8, 9))
                 elif entrada==3:
                     pro.editar()
                 elif entrada==4:

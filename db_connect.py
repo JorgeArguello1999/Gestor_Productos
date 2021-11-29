@@ -17,12 +17,15 @@ class conexion:
 
         #Reciviendo informacion y validando
         if user_name != None and password != None:
-            cur.execute("SELECT clave FROM usuarios WHERE clave=?", (password,))    
-            cur.execute("SELECT nombre FROM usuarios WHERE nombre=?", (user_name,))
-            print("\nTus credenciales son correctas\n")
+    
+            respuesta= cur.execute("SELECT nombre FROM usuarios WHERE nombre=? and clave=?", (user_name,password))
+            for nombre in cur:
+                print(f"\nTus credenciales son correctas: {nombre}\n")
+                return True 
+
+
 
         self.conn.close()
-        return True 
 
 #Modificamos la tabla de productos
 class productos(conexion):
@@ -32,17 +35,15 @@ class productos(conexion):
         for nombre in cur:
             return nombre
 
-    def insertar(self):
+    def insertar(self, codigo, nombre, cantidad, precio):
         cur = self.conn.cursor()
-        pass
-        """
         #insert information
         try:
-            cur.execute("INSERT INTO usuarios (nombre,clave) VALUES (?, ?)", ("Maria","DB"))
+            cur.execute("INSERT INTO productos (id, nombre, cantidad, precio) VALUES (?, ?, ?, ?)", (codigo, nombre, cantidad, precio))
         except mariadb.Error as e:
             print(f"Error: {e}")
-        conn.commit()
-        """
+        self.conn.commit()
+        return self.listar() 
 
     def editar(self):
         cur = self.conn.cursor()
