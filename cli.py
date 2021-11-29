@@ -24,9 +24,15 @@ class cli:
                 pro= db_connect.productos()
 
                 if entrada==1:
-                    print(pro.listar())
+                    pro.listar()
+
                 elif entrada==2:
-                    print(pro.insertar(3, 'Nombre', 8, 9))
+                    codigo= int(input("Ingrese el codigo del producto: "))
+                    nombre= input("Ingresa el nombre del producto: ")
+                    cantidad= int(input("Ingrese cantidad de producto: "))
+                    precio= float(input("Ingrese el precio del producto: "))
+                    pro.insertar(codigo, nombre, cantidad, precio)
+
                 elif entrada==3:
                     pro.editar()
                 elif entrada==4:

@@ -31,19 +31,19 @@ class conexion:
 class productos(conexion):
     def listar(self):
         cur = self.conn.cursor()
-        cur.execute("SELECT nombre FROM productos")
-        for nombre in cur:
-            return nombre
+        cur.execute("SELECT * FROM productos")
+        salida= cur.fetchall()
+        return print(salida)
 
     def insertar(self, codigo, nombre, cantidad, precio):
         cur = self.conn.cursor()
-        #insert information
         try:
             cur.execute("INSERT INTO productos (id, nombre, cantidad, precio) VALUES (?, ?, ?, ?)", (codigo, nombre, cantidad, precio))
+            print("\nRealizado con exito\n")
         except mariadb.Error as e:
             print(f"Error: {e}")
         self.conn.commit()
-        return self.listar() 
+        return print(self.listar() )
 
     def editar(self):
         cur = self.conn.cursor()
