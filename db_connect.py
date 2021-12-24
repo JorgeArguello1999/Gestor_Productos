@@ -29,12 +29,14 @@ class conexion:
 
 #Modificamos la tabla de productos
 class productos(conexion):
+    #Funcion que lista los contenidos
     def listar(self):
         cur = self.conn.cursor()
         cur.execute("SELECT * FROM productos")
         salida= cur.fetchall()
         return print(salida)
 
+    #Funcion que inserta contenido en la tabla
     def insertar(self, codigo, nombre, cantidad, precio):
         cur = self.conn.cursor()
         try:
@@ -45,6 +47,7 @@ class productos(conexion):
         self.conn.commit()
         return print(self.listar() )
 
+    #Funcion que edita los contenidos 
     def editar(self):
         cur = self.conn.cursor()
         pass

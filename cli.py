@@ -36,8 +36,9 @@ class cli:
                 elif entrada==3:
                     pro.editar()
                 elif entrada==4:
-                    pro.eliminar()
-
+                    entrada= input("Seguro quieres eliminar el contenido? (Si o No)")
+                    if entrada=="si":
+                        pro.eliminar()
 
 
 cli().inicio()
