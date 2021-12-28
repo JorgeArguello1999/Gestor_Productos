@@ -17,15 +17,15 @@ Posteriormente nos pedira que ingresemos el usuario y contraseña esto se config
 ## Configuración de la Base de Datos
 Base de datos= "aplicacion"
 Tablas:
--productos
---id (int 11)
---nombre (varchar 30)
---cantidad (init 11)
---precio (float)
+- productos
+    - id (int 11)
+    - nombre (varchar 30)
+    - cantidad (init 11)
+    - precio (float)
 
--usuarios
---nombre (varchar 30)
---clave (varchar 10)
+- usuarios
+    - nombre (varchar 30)
+    - clave (varchar 10)
 
 # Errores
 ## Error (101)
