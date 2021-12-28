@@ -33,8 +33,10 @@ class productos(conexion):
     def listar(self):
         cur = self.conn.cursor()
         cur.execute("SELECT * FROM productos")
-        salida= cur.fetchall()
-        return salida
+        self.salida= cur.fetchall()
+        for i in self.salida:
+            print(i)
+        return self.salida
 
     #Funcion que inserta contenido en la tabla
     def insertar(self, codigo, nombre, cantidad, precio):
@@ -45,20 +47,23 @@ class productos(conexion):
         except mariadb.Error as e:
             print(f"Error: {e}")
         self.conn.commit()
-        return print(self.listar() )
+        return self.salida 
 
     #Funcion que edita los contenidos 
     def editar(self):
         cur = self.conn.cursor()
         pass
 
+    #Funcion para eliminar los productos
     def eliminar(self, codigo, nombre):
         cur = self.conn.cursor()
         try:
+            productos= self.listar()
+            for i in productos:
+                print(i)
             cur.execute("DELETE FROM productos WHERE ? =?; AND ?=?"), (codigo, nombre)
         except mariadb.Error as e:
             print(f"Error: {e}")
-
         self.conn.commit()
         return print("Eliminado: ?"), (nombre)
 
