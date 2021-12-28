@@ -36,9 +36,13 @@ class cli:
                 elif entrada==3:
                     pro.editar()
                 elif entrada==4:
+                    pro.listar()
+                    codigo= int(input("Ingresa el ID del producto: ") )
+                    nombre= input("Ingresa el nombre del producto: ")
+                    
                     entrada= input("Seguro quieres eliminar el contenido? (Si o No)")
                     if entrada=="si":
-                        pro.eliminar()
+                        pro.eliminar(codigo, nombre)
 
 
 cli().inicio()

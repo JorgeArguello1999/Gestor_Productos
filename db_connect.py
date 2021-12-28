@@ -34,7 +34,7 @@ class productos(conexion):
         cur = self.conn.cursor()
         cur.execute("SELECT * FROM productos")
         salida= cur.fetchall()
-        return print(salida)
+        return salida
 
     #Funcion que inserta contenido en la tabla
     def insertar(self, codigo, nombre, cantidad, precio):
@@ -52,7 +52,15 @@ class productos(conexion):
         cur = self.conn.cursor()
         pass
 
-    def eliminar(self):
+    def eliminar(self, codigo, nombre):
         cur = self.conn.cursor()
-        pass
+        try:
+            cur.execute("DELETE FROM productos WHERE ? =?; AND ?=?"), (codigo, nombre)
+        except mariadb.Error as e:
+            print(f"Error: {e}")
 
+        self.conn.commit()
+        return print("Eliminado: ?"), (nombre)
+
+    def detector(self):
+        pass
