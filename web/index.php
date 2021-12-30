@@ -6,7 +6,7 @@
 </head>
 <body>
 
-	<h1>Manegador de Productos<h1>
+	<h1>Manegador de Productos</h1>
 	<p>Este es un manegador de productos (prototipo) para negocios pequeños</p>
 	<?php include "database.php"; ?>
 

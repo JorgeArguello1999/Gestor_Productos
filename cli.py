@@ -43,7 +43,19 @@ class cli:
 
                 # Editar
                 elif entrada==3:
-                    pro.editar()
+                    pro.listar()
+                    codigo= int(input("Ingresa el codigo del producto: "))
+                    nombre= input("Ingresa el nombre del producto: ")
+                    cantidad= int(input("Ingrese cantidad de producto: "))
+                    precio= float(input("Ingrese el precio del producto: "))
+
+                    # Detector de elemento
+                    detector= pro.detector(codigo)
+                    if detector==True:
+                        pro.editar(codigo, nombre, cantidad, precio)
+                        print("El elemento a modificar existe\n") 
+                    else:
+                        print("\nError (103) El elemento a modificar no existe")
 
                 # Eliminar
                 elif entrada==4:

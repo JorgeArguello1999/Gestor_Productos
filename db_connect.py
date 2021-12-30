@@ -52,9 +52,15 @@ class productos(conexion):
         self.conn.commit()
 
     #Funcion que edita los contenidos 
-    def editar(self):
+    def editar(self, codigo, nombre, cantidad, precio):
         cur = self.conn.cursor()
-        pass
+        try: 
+            cur.execute("UPDATE productos SET id=?, nombre=?, cantidad=?, precio=? WHERE id=?;", (codigo, nombre, cantidad, precio, codigo))
+            print("\nEditado con exito")
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+
+        self.conn.commit()
 
     #Funcion para eliminar los productos
     def eliminar(self, codigo, nombre):
