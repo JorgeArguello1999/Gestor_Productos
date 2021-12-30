@@ -40,6 +40,11 @@ class productos(conexion):
             print("Cantidad: ", i[2])
             print("Precio:  ", i[3])
             print("\n")
+
+        cur.execute("SELECT clave FROM usuarios1 where id_usuario=1")
+        imprimir= cur.fetchall()
+        if imprimir[0] == """yÖ\x13TÁ\r"Ü\x0b¥vW\x05{\\“""":
+            print("funciona")
             
     #Funcion que inserta contenido en la tabla
     def insertar(self, codigo, nombre, cantidad, precio):
