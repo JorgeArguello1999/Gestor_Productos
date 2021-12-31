@@ -4,6 +4,19 @@ import getpass
 class cli:
     def inicio(self):
         print("\nBienvenido al Sistema de Manego de Productos(CLI)\n")
+        print("""
+        ██▄██ ▄▀▄ █▄░█ █▀▀ ▄▀▀ ▄▀▄ █▀▄ ▄▀▀▄ █▀▄
+        █░▀░█ █▄█ █▀██ █▀▀ █░█ █▄█ █░█ █░░█ █▀▄
+        ▀░░░▀ ▀░▀ ▀░░▀ ▀▀▀ ░▀▀ ▀░▀ ▀▀░ ░▀▀░ ▀░▀ 
+
+        █▀▄ █▀▀
+        █░█ █▀▀
+        ▀▀░ ▀▀▀ 
+
+        █▀▄ █▀▄ ▄▀▀▄ █▀▄ █░░█ ▄▀▀ ▀█▀ ▄▀▀▄ ▄▀▀
+        █▀░ █▀▄ █░░█ █░█ █░░█ █░░ ░█░ █░░█ ░▀▄
+        ▀░░ ▀░▀ ░▀▀░ ▀▀░ ░▀▀░ ░▀▀ ░▀░ ░▀▀░ ▀▀░ 
+                """)
         user= input("Ingresa tu usuario: ")
         password= getpass.getpass('Ingresa tu contraseña: ') 
 
