@@ -8,14 +8,20 @@ Tener instalado python3 y pip3 (Instalador de paquetes de python3), instalar mar
 ## Creacion de la Base de datos
 Para crear la Base de datos necesitaremos MariaDB o en su defecto MySQL 4.04 en adelante. Esto se recomienda ya que se usa el cifrado AES que esta disponible desde la version 4.04 en adelante en el gestor de Base de Datos MySQL y MariaDB, digite los siguientes comandos dentro de la consola de MySQL o MariaDB
 
-### Creacuib de la Base de Datos
+### Creacion de la Base de Datos
 ```
-create database aplicaciones;
+create database aplicacion;
+use aplicacion;
 ```
 
 ### Creacion de la Tabla para los usuarios
 ```
 create table usuarios( id_usuario integer not null, usuario varchar(20) not null, clave varchar(50) not null ) engine= 'InnoDB' default char set= latin1;
+```
+
+### Creacion de la Tabla para los productos
+```
+create table productos( id integer(11), nombre varchar(30), cantidad integer(11), precio float);
 ```
 
 ## Configuracion

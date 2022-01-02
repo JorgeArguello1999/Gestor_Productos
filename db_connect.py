@@ -18,17 +18,16 @@ class conexion:
         #Reciviendo informacion y validando
         if user_name != None and password != None:
     
-            respuesta= cur.execute("SELECT nombre FROM usuarios WHERE nombre=? and clave=?", (user_name,password))
+            respuesta= cur.execute("SELECT usuario FROM usuarios WHERE usuario=? and clave=?", (user_name,password))
             for nombre in cur:
-                print(f"\nTus credenciales son correctas: {nombre}\n")
+                print("\nTus credenciales son correctas: ", nombre[0],"\n")
                 return True 
-
-
 
         self.conn.close()
 
 #Modificamos la tabla de productos
 class productos(conexion):
+
     #Funcion que lista los contenidos
     def listar(self):
         cur= self.conn.cursor()
@@ -41,11 +40,6 @@ class productos(conexion):
             print("Precio:  ", i[3])
             print("\n")
 
-        cur.execute("SELECT clave FROM usuarios1 where id_usuario=1")
-        imprimir= cur.fetchall()
-        if imprimir[0] == """yÖ\x13TÁ\r"Ü\x0b¥vW\x05{\\“""":
-            print("funciona")
-            
     #Funcion que inserta contenido en la tabla
     def insertar(self, codigo, nombre, cantidad, precio):
         cur = self.conn.cursor()
