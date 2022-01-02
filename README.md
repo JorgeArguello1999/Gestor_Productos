@@ -48,6 +48,7 @@ Tablas:
     - clave (varchar 50 not null) 
 
 # Errores
+
 ## Error (101)
 El error 101 en el area de Insertar hace referencia a que en la base de datos ya existe un elemento con el mismo ID, si se quiere registrar un elemento del mismo nombre, se recomienda usar otro ID para evitar este problema
 ## Error (102)
@@ -55,3 +56,7 @@ El error 102 es aquel que aparece cuando se intenta eliminar un producto que no 
 
 ## Error (103)
 El error 103 es aquel que ocurre cuando un elemento a actualizar no existe en la tabla de la base de datos, para solucionarlo debes crear el elemento.
+
+
+# Herramientas externas
+https://www.trucosface.com/generador-de-letras-ascii.html

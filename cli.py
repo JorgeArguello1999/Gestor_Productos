@@ -1,17 +1,34 @@
 import db_connect
+import os
 import getpass
 
+
 class cli:
-    def inicio(self):
+
+    def salida(self):
+        salida= input("Quieres Salir: S/N ")
+        if salida=="N" or salida=="n":
+            cli()
+        else:
+            os.system("exit")
+
+    def limpiador(self):
+        command= "clear"
+        if os.name in ('nt', 'dos'):
+            command= "cls"
+        os.system(command)
+
+    def __init__(self):
+        self.limpiador()
         print("\nBienvenido al Sistema de Manego de Productos(CLI)\n")
         print("""
         ██▄██ ▄▀▄ █▄░█ █▀▀ ▄▀▀ ▄▀▄ █▀▄ ▄▀▀▄ █▀▄
         █░▀░█ █▄█ █▀██ █▀▀ █░█ █▄█ █░█ █░░█ █▀▄
         ▀░░░▀ ▀░▀ ▀░░▀ ▀▀▀ ░▀▀ ▀░▀ ▀▀░ ░▀▀░ ▀░▀ 
 
-        █▀▄ █▀▀
-        █░█ █▀▀
-        ▀▀░ ▀▀▀ 
+                       █▀▄ █▀▀
+                       █░█ █▀▀
+                       ▀▀░ ▀▀▀ 
 
         █▀▄ █▀▄ ▄▀▀▄ █▀▄ █░░█ ▄▀▀ ▀█▀ ▄▀▀▄ ▄▀▀
         █▀░ █▀▄ █░░█ █░█ █░░█ █░░ ░█░ █░░█ ░▀▄
@@ -33,15 +50,33 @@ class cli:
                 4.- Eliminar articulos
                         """)
                 entrada= int(input("Tu eleccion: "))
+                self.limpiador()
 
                 pro= db_connect.productos()
 
                 # Listar
                 if entrada==1:
+                    print("""
+                         █░░ ▀█▀ ▄▀▀ ▀█▀ ▄▀▄ █▀▄
+                         █░░ ░█░ ░▀▄ ░█░ █▄█ █▀▄
+                         ▀▀▀ ▀▀▀ ▀▀░ ░▀░ ▀░▀ ▀░▀ 
+                    ▄▀▄ █▀▄ ▀█▀ ▀█▀ ▄▀▀ █░░█ █░░ ▄▀▀▄ ▄▀▀
+                    █▄█ █▀▄ ░█░ ░█░ █░░ █░░█ █░░ █░░█ ░▀▄
+                    ▀░▀ ▀░▀ ░▀░ ▀▀▀ ░▀▀ ░▀▀░ ▀▀▀ ░▀▀░ ▀▀░ 
+                    """)
                     pro.listar()
+                    self.salida()
 
                 # Insertar
                 elif entrada==2:
+                    print("""
+                      ▀█▀ █▄░█ ▄▀▀ █▀▀ █▀▄ ▀█▀ ▄▀▄ █▀▄
+                      ░█░ █▀██ ░▀▄ █▀▀ █▀▄ ░█░ █▄█ █▀▄
+                      ▀▀▀ ▀░░▀ ▀▀░ ▀▀▀ ▀░▀ ░▀░ ▀░▀ ▀░▀ 
+                    ▄▀▄ █▀▄ ▀█▀ ▀█▀ ▄▀▀ █░░█ █░░ ▄▀▀▄ ▄▀▀
+                    █▄█ █▀▄ ░█░ ░█░ █░░ █░░█ █░░ █░░█ ░▀▄
+                    ▀░▀ ▀░▀ ░▀░ ▀▀▀ ░▀▀ ░▀▀░ ▀▀▀ ░▀▀░ ▀▀░ 
+                    """)
                     pro.listar()
                     codigo= int(input("Ingrese el codigo del producto: "))
                     nombre= input("Ingresa el nombre del producto: ")
@@ -53,9 +88,19 @@ class cli:
                         print("Error (101) El elemento ya existe")
                     else:
                         pro.insertar(codigo, nombre, cantidad, precio)
+                    self.salida()
 
                 # Editar
                 elif entrada==3:
+                    print("""
+                    
+                           █▀▀ █▀▄ ▀█▀ ▀█▀ ▄▀▄ █▀▄
+                           █▀▀ █░█ ░█░ ░█░ █▄█ █▀▄
+                           ▀▀▀ ▀▀░ ▀▀▀ ░▀░ ▀░▀ ▀░▀ 
+                    ▄▀▄ █▀▄ ▀█▀ ▀█▀ ▄▀▀ █░░█ █░░ ▄▀▀▄ ▄▀▀
+                    █▄█ █▀▄ ░█░ ░█░ █░░ █░░█ █░░ █░░█ ░▀▄
+                    ▀░▀ ▀░▀ ░▀░ ▀▀▀ ░▀▀ ░▀▀░ ▀▀▀ ░▀▀░ ▀▀░ 
+                    """)
                     pro.listar()
                     codigo= int(input("Ingresa el codigo del producto: "))
                     nombre= input("Ingresa el nombre del producto: ")
@@ -69,9 +114,18 @@ class cli:
                         print("El elemento a modificar existe\n") 
                     else:
                         print("\nError (103) El elemento a modificar no existe")
+                    self.salida()
 
                 # Eliminar
                 elif entrada==4:
+                    print("""
+                      █▀▀ █░░ ▀█▀ ██▄██ ▀█▀ █▄░█ ▄▀▄ █▀▄
+                      █▀▀ █░░ ░█░ █░▀░█ ░█░ █▀██ █▄█ █▀▄
+                      ▀▀▀ ▀▀▀ ▀▀▀ ▀░░░▀ ▀▀▀ ▀░░▀ ▀░▀ ▀░▀ 
+                    ▄▀▄ █▀▄ ▀█▀ ▀█▀ ▄▀▀ █░░█ █░░ ▄▀▀▄ ▄▀▀
+                    █▄█ █▀▄ ░█░ ░█░ █░░ █░░█ █░░ █░░█ ░▀▄
+                    ▀░▀ ▀░▀ ░▀░ ▀▀▀ ░▀▀ ░▀▀░ ▀▀▀ ░▀▀░ ▀▀░ 
+                    """)
                     pro.listar()
                     codigo= int(input("Ingresa el ID del producto: ") )
                     nombre= input("Ingresa el nombre del producto: ")
@@ -84,5 +138,6 @@ class cli:
                         pro.eliminar(codigo, nombre)
                     else:
                         print("\nError (102) El elemento a eliminar no existe")
+                    self.salida()
 
-cli().inicio()
+cli()
