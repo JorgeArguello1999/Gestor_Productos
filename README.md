@@ -4,7 +4,8 @@ Una herramienta para el manego de productos puede ser en un local de comida, rop
 
 # Instalacion
 ## Importante
-Tener instalado python3 y pip3 (Instalador de paquetes de python3), instalar mariadb con pip3 para la conexion, se esta trabajando con un servidor local, base de datos aplicacion, tabla productos y usuarios
+Tener instalado python3 y pip3 (Instalador de paquetes de python3), instalar mariadb con pip3 para la conexion, se esta trabajando con un servidor local, base de datos aplicacion, tabla productos y usuarios.
+Para desarrollar la GUI necesitas instalar PyQt5
 ## Creacion de la Base de datos
 Para crear la Base de datos necesitaremos MariaDB o en su defecto MySQL 4.04 en adelante. Esto se recomienda ya que se usa el cifrado AES que esta disponible desde la version 4.04 en adelante en el gestor de Base de Datos MySQL y MariaDB, digite los siguientes comandos dentro de la consola de MySQL o MariaDB
 

@@ -126,8 +126,8 @@
      <rect>
       <x>10</x>
       <y>100</y>
-      <width>441</width>
-      <height>271</height>
+      <width>421</width>
+      <height>401</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -136,15 +136,35 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QTableView" name="tableView">
+    <widget class="QTableWidget" name="tabla_productos">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>421</width>
-       <height>251</height>
+       <width>401</width>
+       <height>381</height>
       </rect>
      </property>
+     <column>
+      <property name="text">
+       <string>ID</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Nombre</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Cantidad</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Precio</string>
+      </property>
+     </column>
     </widget>
    </widget>
    <widget class="QLabel" name="label_3">
@@ -158,6 +178,122 @@
     </property>
     <property name="text">
      <string>LISTAR PRODUCTOS</string>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>100</y>
+      <width>341</width>
+      <height>401</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>57</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Insertar:</string>
+     </property>
+    </widget>
+    <widget class="QFrame" name="frame_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>321</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+    </widget>
+    <widget class="QFrame" name="frame_4">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>289</y>
+       <width>321</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+    </widget>
+    <widget class="QFrame" name="frame_5">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>160</y>
+       <width>321</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>140</y>
+       <width>57</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Editar:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>270</y>
+       <width>57</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Eliminar:</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>80</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>OPCIONES</string>
     </property>
    </widget>
   </widget>

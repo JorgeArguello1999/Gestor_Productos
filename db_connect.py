@@ -39,6 +39,7 @@ class productos(conexion):
             print("Cantidad: ", i[2])
             print("Precio:  ", i[3])
             print("\n")
+        return salida
 
     #Funcion que inserta contenido en la tabla
     def insertar(self, codigo, nombre, cantidad, precio):
