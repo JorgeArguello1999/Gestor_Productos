@@ -11,6 +11,12 @@ class ejemplo_Gui(QMainWindow):
         # Deshabilitamos los frames 
         self.frame_Listar.setEnabled(False)
         self.frame_Opciones.setEnabled(False)
+        
+        # Modificamos los tamaños de la tabla
+        self.tabla_productos.setColumnWidth(0,40)
+        self.tabla_productos.setColumnWidth(1,190)
+        self.tabla_productos.setColumnWidth(2,70)
+        self.tabla_productos.setColumnWidth(2,60)
 
         # Boton Login
         self.boton_registro.clicked.connect(self.login)
@@ -43,8 +49,17 @@ class ejemplo_Gui(QMainWindow):
     def cargador(self):
         self.pro= db_connect.productos()
         datos= self.pro.listar()
-        
-        for i in datos:
+        row=0
+        self.tabla_productos.setRowCount(len(datos))
+        for producto in datos:
+            self.tabla_productos.setItem(row, 0, QtWidgets.QTableWidgetItem(str(producto[0])))
+            self.tabla_productos.setItem(row, 1, QtWidgets.QTableWidgetItem(str(producto[1])))
+            self.tabla_productos.setItem(row, 2, QtWidgets.QTableWidgetItem(str(producto[2])))
+            self.tabla_productos.setItem(row, 3, QtWidgets.QTableWidgetItem(str(producto[3])))
+            row=row+1
+
+        salida= self.tabla_productos.selectedItems()
+        for i in salida:
             print(i)
 
     # Iniciamos las opciones para la tabla
