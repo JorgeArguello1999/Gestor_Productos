@@ -47,6 +47,7 @@ class productos(conexion):
         try:
             cur.execute("INSERT INTO productos (id, nombre, cantidad, precio) VALUES (?, ?, ?, ?)", (codigo, nombre, cantidad, precio))
             print("\nRealizado con exito\n")
+            return True
         except mariadb.Error as e:
             print(f"Error: {e}")
         self.conn.commit()

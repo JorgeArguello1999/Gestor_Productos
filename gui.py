@@ -8,6 +8,9 @@ class ejemplo_Gui(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi("interfaz_grafica.ui", self)
+        # Deshabilitamos los frames 
+        self.frame_Listar.setEnabled(False)
+        self.frame_Opciones.setEnabled(False)
 
         # Boton Login
         self.boton_registro.clicked.connect(self.login)
@@ -23,23 +26,43 @@ class ejemplo_Gui(QMainWindow):
 
         if respuesta==True:
             validacion="[ Autorizado ]"
+            # Habilitamos los frames
+            self.frame_Listar.setEnabled(True)
+            self.frame_Opciones.setEnabled(True)
             # Iniciamos el cargador para la tabla
+            self.cargador()
+            # Iniciamos las opciones
+            self.opciones()
+
         else:
             validacion="[ No Autorizado ]"
 
         self.comprobador.setText(validacion)
-        self.cargador()
 
+    # Cargamos los datos de la tabla
     def cargador(self):
         self.pro= db_connect.productos()
         datos= self.pro.listar()
-        row=0
-        for producto in datos:
-            self.tabla_productos.setItem(row, 0, QtWidgets.QTableWidgetItem(str(producto[0])))
-            self.tabla_productos.setItem(row, 1, QtWidgets.QTableWidgetItem(producto[1]))
-            self.tabla_productos.setItem(row, 2, QtWidgets.QTableWidgetItem(str(producto[2])))
-            self.tabla_productos.setItem(row, 3, QtWidgets.QTableWidgetItem(str(producto[3])))
-            row= row+1
+        
+        for i in datos:
+            print(i)
+
+    # Iniciamos las opciones para la tabla
+    def opciones(self):
+        self.boton_insertar.clicked.connect(self.insertar)
+
+    def insertar(self):
+        codigo= self.id_insertar.text()
+        nombre= self.nombre_insertar.text()
+        cantidad= self.cantidad_insertar.text()
+        precio= self.precio_insertar.text()
+
+        if self.pro.insertar(codigo, nombre, cantidad, precio)==True:
+            validacion= "[ Realizado con Exito ]"
+        else:
+            validacion= "[ Error 104 ]"
+
+        self.mensaje_insertar.setText(validacion)    
 
 if __name__=="__main__":
     app= QApplication(sys.argv)
