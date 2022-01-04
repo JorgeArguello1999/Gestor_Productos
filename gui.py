@@ -49,7 +49,18 @@ class ejemplo_Gui(QMainWindow):
 
     # Iniciamos las opciones para la tabla
     def opciones(self):
+        # Deshabilitamos los campos de Nombre e ID para las opciones de Editar y Eliminar
+        self.id_editar.setEnabled(False)
+        self.nombre_editar.setEnabled(False)
+        self.id_eliminar.setEnabled(False)
+        self.nombre_eliminar.setEnabled(False)
+
+        # Boton para insertar elementos
         self.boton_insertar.clicked.connect(self.insertar)
+        # Boton para Editar elementos
+        self.boton_editar.clicked.connect(self.editar)
+        # Boton para Eliminar elementos
+        self.boton_eliminar.clicked.connect(self.eliminar)
 
     def insertar(self):
         codigo= self.id_insertar.text()
@@ -63,6 +74,12 @@ class ejemplo_Gui(QMainWindow):
             validacion= "[ Error 104 ]"
 
         self.mensaje_insertar.setText(validacion)    
+
+    def editar(self):
+        pass
+
+    def eliminar(self):
+        pass
 
 if __name__=="__main__":
     app= QApplication(sys.argv)
