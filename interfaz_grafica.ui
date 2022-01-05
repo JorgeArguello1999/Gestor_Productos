@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Manegador de Productos</string>
+   <string>Manejador de Productos</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QFrame" name="frame_Registro">
@@ -157,6 +157,9 @@
        <width>401</width>
        <height>381</height>
       </rect>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
      </property>
      <column>
       <property name="text">

@@ -20,12 +20,11 @@ class cli:
 
     def __init__(self):
         self.limpiador()
-        print("\nBienvenido al Sistema de Manego de Productos(CLI)\n")
+        print("\nBienvenido al Sistema de Manejo de Productos(CLI)\n")
         print("""
-        ██▄██ ▄▀▄ █▄░█ █▀▀ ▄▀▀ ▄▀▄ █▀▄ ▄▀▀▄ █▀▄
-        █░▀░█ █▄█ █▀██ █▀▀ █░█ █▄█ █░█ █░░█ █▀▄
-        ▀░░░▀ ▀░▀ ▀░░▀ ▀▀▀ ░▀▀ ▀░▀ ▀▀░ ░▀▀░ ▀░▀ 
-
+        ██▄██ ▄▀▄ █▄░█ █▀▀ ▀▀█ ▄▀▄ █▀▄ ▄▀▀▄ █▀▄
+        █░▀░█ █▄█ █▀██ █▀▀ ▄░█ █▄█ █░█ █░░█ █▀▄
+        ▀░░░▀ ▀░▀ ▀░░▀ ▀▀▀ ░▀░ ▀░▀ ▀▀░ ░▀▀░ ▀░▀ 
                        █▀▄ █▀▀
                        █░█ █▀▀
                        ▀▀░ ▀▀▀ 

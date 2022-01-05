@@ -13,10 +13,10 @@ class ejemplo_Gui(QMainWindow):
         self.frame_Opciones.setEnabled(False)
         
         # Modificamos los tamaños de la tabla
-        self.tabla_productos.setColumnWidth(0,40)
-        self.tabla_productos.setColumnWidth(1,190)
+        self.tabla_productos.setColumnWidth(0,50)
+        self.tabla_productos.setColumnWidth(1,200)
         self.tabla_productos.setColumnWidth(2,70)
-        self.tabla_productos.setColumnWidth(2,60)
+        self.tabla_productos.setColumnWidth(3,60)
 
         # Boton Login
         self.boton_registro.clicked.connect(self.login)
@@ -58,8 +58,18 @@ class ejemplo_Gui(QMainWindow):
             self.tabla_productos.setItem(row, 3, QtWidgets.QTableWidgetItem(str(producto[3])))
             row=row+1
 
-        salida= self.tabla_productos.selectedItems()
-        print(salida)
+        self.tabla_productos.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.tabla_productos.cellClicked.connect(self.retornador)
+        
+        #self.tabla_productos.itemSelectionChanged.connect(self.retornador)
+
+    def retornador(self):
+        codigo= self.tabla_productos.selectedIndexes()[0].data()
+        nombre= self.tabla_productos.selectedIndexes()[1].data()
+        cantidad= self.tabla_productos.selectedIndexes()[2].data()
+        precio= self.tabla_productos.selectedIndexes()[3].data()
+        print(codigo, nombre, cantidad, precio)
+        pass
 
     # Iniciamos las opciones para la tabla
     def opciones(self):

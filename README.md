@@ -1,6 +1,6 @@
-# Manegador de Productos 
+# Manejador de Productos 
 ## ¿Que es?
-Una herramienta para el manego de productos puede ser en un local de comida, ropa o cualquier tipo de negocio interesado en tener un control de todos los productos en almacen
+Una herramienta para el manejo de productos puede ser en un local de comida, ropa o cualquier tipo de negocio interesado en tener un control de todos los productos en almacen
 
 # Instalacion
 ## Importante
