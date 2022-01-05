@@ -59,8 +59,7 @@ class ejemplo_Gui(QMainWindow):
             row=row+1
 
         salida= self.tabla_productos.selectedItems()
-        for i in salida:
-            print(i)
+        print(salida)
 
     # Iniciamos las opciones para la tabla
     def opciones(self):
@@ -78,17 +77,15 @@ class ejemplo_Gui(QMainWindow):
         self.boton_eliminar.clicked.connect(self.eliminar)
 
     def insertar(self):
-        codigo= self.id_insertar.text()
-        nombre= self.nombre_insertar.text()
-        cantidad= self.cantidad_insertar.text()
-        precio= self.precio_insertar.text()
-
-        if self.pro.insertar(codigo, nombre, cantidad, precio)==True:
-            validacion= "[ Realizado con Exito ]"
-        else:
-            validacion= "[ Error 104 ]"
-
-        self.mensaje_insertar.setText(validacion)    
+        # Obtenemos la entrada del usuario
+        codigo= int(self.id_insertar.text())
+        nombre= str(self.nombre_insertar.text())
+        cantidad= int(self.cantidad_insertar.text())
+        precio= float(self.precio_insertar.text())
+        # Llamamos a la funcion del componente db_connect.insertar 
+        self.pro.insertar(codigo, nombre, cantidad, precio)
+        # Insertamos el cargador para ver lo añadido
+        self.cargador()
 
     def editar(self):
         pass
