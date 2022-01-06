@@ -93,15 +93,22 @@ class ejemplo_Gui(QMainWindow):
         self.boton_eliminar.clicked.connect(self.eliminar)
 
     def insertar(self):
-        # Obtenemos la entrada del usuario
-        codigo= int(self.id_insertar.text())
-        nombre= str(self.nombre_insertar.text())
-        cantidad= int(self.cantidad_insertar.text())
-        precio= float(self.precio_insertar.text())
-        # Llamamos a la funcion del componente db_connect.insertar 
-        self.pro.insertar(codigo, nombre, cantidad, precio)
-        # Insertamos el cargador para ver lo añadido
-        self.cargador()
+        try:
+            # Obtenemos la entrada del usuario
+            codigo= int(self.id_insertar.text())
+            nombre= str(self.nombre_insertar.text())
+            cantidad= int(self.cantidad_insertar.text())
+            precio= float(self.precio_insertar.text())
+
+            if self.pro.detector(codigo, nombre)!=True:
+                # Evitamos que ingrese algo con el mismo nombre o mismo id
+                # Llamamos a la funcion del componente db_connect.insertar 
+                self.pro.insertar(codigo, nombre, cantidad, precio)
+                # Insertamos el cargador para ver lo añadido
+                self.cargador()
+                self.mensaje_insertar.setText("[ Realizado con Exito ]")
+        except:
+            self.mensaje_insertar.setText("[ Error 104 ]")
 
     def editar(self):
         """

@@ -552,7 +552,7 @@
        <string>Nombre:</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit">
+     <widget class="QLineEdit" name="nombreEntrada_editar">
       <property name="geometry">
        <rect>
         <x>70</x>

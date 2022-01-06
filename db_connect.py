@@ -48,6 +48,7 @@ class productos(conexion):
             #insert into productos(id, nombre, cantidad, precio)  select 99, "Hijo", 9, 9.90 where not exists(select 99 from productos where nombre="Hijo" );
             cur.execute("INSERT INTO productos (id, nombre, cantidad, precio) VALUES (?, ?, ?, ?)", (codigo, nombre, cantidad, precio))
             print("\nRealizado con exito\n")
+
         except mariadb.Error as e:
             print(f"Error: {e}")
         self.conn.commit()

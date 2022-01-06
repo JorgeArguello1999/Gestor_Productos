@@ -56,8 +56,10 @@ El error 101 en el area de Insertar hace referencia a que en la base de datos ya
 El error 102 es aquel que aparece cuando se intenta eliminar un producto que no existe en la base de datos.
 
 ## Error (103)
-El error 103 es aquel que ocurre cuando un elemento a actualizar no existe en la tabla de la base de datos, para solucionarlo debes crear el elemento.
+El error 103 es aquel que ocurre cuando un elemento a actualizar no existe en la tabla de la base de datos, para solucionarlo debes crear el elemento.
 
+## Error (104)
+Este error es producido por la GUI o Interfaz grafica, este se provoca al ocurrir un error en la inserción de datos en la tabla, debe respetar el tipo de datos que aceptan cada uno Nombre(Texto), ID(Numero Entero), Cantida(Numero Entero), Precio(Numero Flotanteo o Decimal).
 
 # Herramientas externas
 https://www.trucosface.com/generador-de-letras-ascii.html
