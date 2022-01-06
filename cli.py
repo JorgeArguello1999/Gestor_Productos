@@ -82,7 +82,7 @@ class cli:
                     cantidad= int(input("Ingrese cantidad de producto: "))
                     precio= float(input("Ingrese el precio del producto: "))
                     # Detector de elemento
-                    detector= pro.detector(codigo)
+                    detector= pro.detector(codigo, nombre)
                     if detector==True:
                         print("Error (101) El elemento ya existe")
                     else:

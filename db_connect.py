@@ -45,6 +45,7 @@ class productos(conexion):
     def insertar(self, codigo, nombre, cantidad, precio):
         cur = self.conn.cursor()
         try:
+            #insert into productos(id, nombre, cantidad, precio)  select 99, "Hijo", 9, 9.90 where not exists(select 99 from productos where nombre="Hijo" );
             cur.execute("INSERT INTO productos (id, nombre, cantidad, precio) VALUES (?, ?, ?, ?)", (codigo, nombre, cantidad, precio))
             print("\nRealizado con exito\n")
         except mariadb.Error as e:
@@ -73,10 +74,10 @@ class productos(conexion):
         self.conn.commit()
 
 
-    def detector(self, codigo):
+    def detector(self, codigo, nombre):
         cur= self.conn.cursor()
         cur.execute("SELECT * FROM productos")
         salida= cur.fetchall()
         for i in salida:
-            if i[0]==codigo:
+            if i[0]==codigo or i[1]==nombre:
                 return True

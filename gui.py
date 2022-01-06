@@ -58,18 +58,15 @@ class ejemplo_Gui(QMainWindow):
             self.tabla_productos.setItem(row, 3, QtWidgets.QTableWidgetItem(str(producto[3])))
             row=row+1
 
-        self.tabla_productos.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        #self.tabla_productos.setSelectionMode(QtWidgets.QAbstractItemView.MultiSelection)
         self.tabla_productos.cellClicked.connect(self.retornador)
         
         #self.tabla_productos.itemSelectionChanged.connect(self.retornador)
 
     def retornador(self):
-        codigo= self.tabla_productos.selectedIndexes()[0].data()
-        nombre= self.tabla_productos.selectedIndexes()[1].data()
-        cantidad= self.tabla_productos.selectedIndexes()[2].data()
-        precio= self.tabla_productos.selectedIndexes()[3].data()
-        print(codigo, nombre, cantidad, precio)
-        pass
+        codigo= int(self.tabla_productos.selectedIndexes()[0].data())
+        self.tabla_productos.selectRow(codigo)
+        print(codigo)
 
     # Iniciamos las opciones para la tabla
     def opciones(self):
