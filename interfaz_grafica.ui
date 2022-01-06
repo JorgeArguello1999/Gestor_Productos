@@ -155,7 +155,7 @@
        <x>10</x>
        <y>10</y>
        <width>401</width>
-       <height>381</height>
+       <height>351</height>
       </rect>
      </property>
      <property name="editTriggers">
@@ -181,6 +181,32 @@
        <string>Precio</string>
       </property>
      </column>
+    </widget>
+    <widget class="QLabel" name="mensaje_productos">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>370</y>
+       <width>231</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="boton_productos">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>370</y>
+       <width>80</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Recargar</string>
+     </property>
     </widget>
    </widget>
    <widget class="QLabel" name="label_3">
@@ -415,16 +441,6 @@
        <string>Nombre:</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="nombre_editar">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>0</y>
-        <width>113</width>
-        <height>23</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_14">
       <property name="geometry">
        <rect>
@@ -436,16 +452,6 @@
       </property>
       <property name="text">
        <string>ID:</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="id_editar">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>0</y>
-        <width>81</width>
-        <height>23</height>
-       </rect>
       </property>
      </widget>
      <widget class="QLabel" name="label_15">
@@ -554,6 +560,32 @@
         <width>113</width>
         <height>23</height>
        </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="nombre_editar">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>10</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="id_editar">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>10</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </widget>

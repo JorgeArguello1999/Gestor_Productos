@@ -60,14 +60,22 @@ class ejemplo_Gui(QMainWindow):
 
         #self.tabla_productos.setSelectionMode(QtWidgets.QAbstractItemView.MultiSelection)
         self.tabla_productos.cellClicked.connect(self.retornador)
-        
         #self.tabla_productos.itemSelectionChanged.connect(self.retornador)
+        
+        # Funcion del boton Recargar
+        self.boton_productos.clicked.connect(self.cargador)
 
     def retornador(self):
-        codigo= int(self.tabla_productos.selectedIndexes()[0].data())
-        linea= int(self.tabla_productos.currentRow())
-        self.tabla_productos.selectRow(linea)
-        print("Linea:", linea, "\nID:", codigo)
+        try:
+            codigo= int(self.tabla_productos.selectedIndexes()[0].data())
+            linea= int(self.tabla_productos.currentRow())
+            self.tabla_productos.selectRow(linea)
+            print("Linea:", linea, "\nID:", codigo)
+            self.mensaje_productos.setText(" ")
+
+            return codigo
+        except:
+            self.mensaje_productos.setText("[ Seleccione el ID del producto ]")
 
     # Iniciamos las opciones para la tabla
     def opciones(self):
@@ -96,6 +104,12 @@ class ejemplo_Gui(QMainWindow):
         self.cargador()
 
     def editar(self):
+        """
+        Lo que esta pasando es que se queda en el retornador y no avanza de ahi
+        codigo= self.retornador()
+        print(type(codigo))
+        self.nombre_editar.setText(codigo)
+        """
         pass
 
     def eliminar(self):
