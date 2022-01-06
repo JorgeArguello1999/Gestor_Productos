@@ -168,7 +168,7 @@
      </column>
      <column>
       <property name="text">
-       <string>Nombre</string>
+       <string notr="true">Nombre</string>
       </property>
      </column>
      <column>
@@ -198,14 +198,27 @@
     <widget class="QPushButton" name="boton_productos">
      <property name="geometry">
       <rect>
-       <x>320</x>
+       <x>339</x>
+       <y>370</y>
+       <width>71</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Recargar</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="seleccionar_productos">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
        <y>370</y>
        <width>80</width>
        <height>23</height>
       </rect>
      </property>
      <property name="text">
-      <string>Recargar</string>
+      <string>Seleccionar</string>
      </property>
     </widget>
    </widget>
@@ -689,6 +702,19 @@
     </property>
     <property name="text">
      <string>OPCIONES</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_18">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>510</y>
+      <width>771</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Editar y Eliminar, primero debe seleccionar el ID del producto y luego presionar el boton de Seleccionar</string>
     </property>
    </widget>
   </widget>

@@ -64,16 +64,18 @@ class ejemplo_Gui(QMainWindow):
         
         # Funcion del boton Recargar
         self.boton_productos.clicked.connect(self.cargador)
+        # Funcion del boton Seleccionar
+        self.seleccionar_productos.clicked.connect(self.seleccionar)
 
     def retornador(self):
         try:
-            codigo= int(self.tabla_productos.selectedIndexes()[0].data())
+            global codigoSeleccion
+            codigoSeleccion= int(self.tabla_productos.selectedIndexes()[0].data())
             linea= int(self.tabla_productos.currentRow())
             self.tabla_productos.selectRow(linea)
-            print("Linea:", linea, "\nID:", codigo)
+            print("Linea:", linea, "\nID:", codigoSeleccion, "\n")
             self.mensaje_productos.setText(" ")
-
-            return codigo
+            return codigoSeleccion
         except:
             self.mensaje_productos.setText("[ Seleccione el ID del producto ]")
 
@@ -110,16 +112,36 @@ class ejemplo_Gui(QMainWindow):
         except:
             self.mensaje_insertar.setText("[ Error 104 ]")
 
+    def seleccionar(self):
+        global salida
+        salida= self.pro.listar()
+        for i in salida:
+            if i[0]==codigoSeleccion:
+                codigo=str(i[0])
+                global nombreSeleccion
+                nombreSeleccion=str(i[1])
+                self.id_editar.setText(codigo)
+                self.nombre_editar.setText(nombreSeleccion)
+
     def editar(self):
-        """
-        Lo que esta pasando es que se queda en el retornador y no avanza de ahi
-        codigo= self.retornador()
-        print(type(codigo))
-        self.nombre_editar.setText(codigo)
-        """
-        pass
+        try:
+            nombre= self.nombreEntrada_editar.text()
+            cantidad= self.cantidad_editar.text()
+            precio= self.precio_editar.text()
+            self.pro.editar(codigoSeleccion, nombre, cantidad, precio)
+            self.cargador()
+            self.mensaje_editar.setText("[ Realizado con Exito ]")
+        except:
+            self.mensaje_editar.setText("[ Error 104 ]")
+        
+        # Limpiamos los registros
+        self.nombreEntrada_editar.setText(" ")
+        self.cantidad_editar.setText(" ")
+        self.precio_editar.setText(" ")
+        self.mensaje_editar(" ")
 
     def eliminar(self):
+        print(codigoSeleccion, nombreSeleccion)
         pass
 
 if __name__=="__main__":
