@@ -65,8 +65,9 @@ class ejemplo_Gui(QMainWindow):
 
     def retornador(self):
         codigo= int(self.tabla_productos.selectedIndexes()[0].data())
-        self.tabla_productos.selectRow(codigo)
-        print(codigo)
+        linea= int(self.tabla_productos.currentRow())
+        self.tabla_productos.selectRow(linea)
+        print("Linea:", linea, "\nID:", codigo)
 
     # Iniciamos las opciones para la tabla
     def opciones(self):
