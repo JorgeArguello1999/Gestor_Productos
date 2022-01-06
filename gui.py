@@ -58,6 +58,22 @@ class ejemplo_Gui(QMainWindow):
             self.tabla_productos.setItem(row, 3, QtWidgets.QTableWidgetItem(str(producto[3])))
             row=row+1
 
+        # Limpiamos los registros
+        self.nombre_insertar.setText("")
+        self.cantidad_insertar.setText("")
+        self.precio_insertar.setText("")
+        self.id_insertar.setText("")
+
+        self.nombreEntrada_editar.setText("")
+        self.nombre_editar.setText("")
+        self.cantidad_editar.setText(" ")
+        self.precio_editar.setText(" ")
+        self.id_editar.setText(" ")
+
+        self.nombre_eliminar.setText(" ")
+        self.id_eliminar.setText(" ")
+
+
         #self.tabla_productos.setSelectionMode(QtWidgets.QAbstractItemView.MultiSelection)
         self.tabla_productos.cellClicked.connect(self.retornador)
         #self.tabla_productos.itemSelectionChanged.connect(self.retornador)
@@ -120,8 +136,14 @@ class ejemplo_Gui(QMainWindow):
                 codigo=str(i[0])
                 global nombreSeleccion
                 nombreSeleccion=str(i[1])
+                # Mostramos en la opcion de Editar
                 self.id_editar.setText(codigo)
                 self.nombre_editar.setText(nombreSeleccion)
+                # Mostramos en la opcion de Eliminar
+                self.id_eliminar.setText(codigo)
+                self.nombre_eliminar.setText(nombreSeleccion)
+                
+                return nombreSeleccion
 
     def editar(self):
         try:
@@ -134,15 +156,18 @@ class ejemplo_Gui(QMainWindow):
         except:
             self.mensaje_editar.setText("[ Error 104 ]")
         
-        # Limpiamos los registros
-        self.nombreEntrada_editar.setText(" ")
-        self.cantidad_editar.setText(" ")
-        self.precio_editar.setText(" ")
-        self.mensaje_editar(" ")
 
     def eliminar(self):
-        print(codigoSeleccion, nombreSeleccion)
-        pass
+        salida= self.pro.listar()
+        for i in salida:
+            try:
+                if i[0]==codigoSeleccion:
+                    self.pro.eliminar(i[0], i[1])
+                    self.cargador()
+                    self.mensaje_eliminar.setText("[ Borrado con exito ]")
+            except:
+                self.mensaje_eliminar.setText(" [Error ID no Seleccionado] ")
+
 
 if __name__=="__main__":
     app= QApplication(sys.argv)

@@ -630,16 +630,6 @@
        <string>Nombre:</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="nombre_eliminar">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>10</y>
-        <width>113</width>
-        <height>23</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_22">
       <property name="geometry">
        <rect>
@@ -651,16 +641,6 @@
       </property>
       <property name="text">
        <string>ID:</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="id_eliminar">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>10</y>
-        <width>81</width>
-        <height>23</height>
-       </rect>
       </property>
      </widget>
      <widget class="QPushButton" name="boton_eliminar">
@@ -683,6 +663,32 @@
         <y>40</y>
         <width>201</width>
         <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="nombre_eliminar">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>10</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="id_eliminar">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>10</y>
+        <width>81</width>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
