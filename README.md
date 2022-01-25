@@ -1,6 +1,6 @@
 # Gestor de Productos 
 ## ¿Que es?
-![Gestor de Productos](/Images/logo.png)
+![Gestor de Productos](web/Images/logo.png)
 
 */Actualmente esta es la versión 2.0, se han corregido la mayor parte de problemas para crear una base fuerte la cual permita añadir funcionalidades a futuro/*
 
@@ -16,8 +16,8 @@ Teniendo la posibilidad de realizar las siguiente opciones
  3. Editar Artículos
  4. Eliminar Artículos
 
-![CLI Screnshoot del programa en ejecución](Images/GPcli1.png)
-![CLI Screnshoot del programa en ejecución](Images/GPcli2.png)
+![CLI Screnshoot del programa en ejecución](web/Images/GPcli1.png)
+![CLI Screnshoot del programa en ejecución](web/Images/GPcli2.png)
 # Instalación
 Recuerde que debe tener de forma previa configurada una Base de Datos para almacenar lo mencionado. *Para esto leer el apartado de **"Creación de la Base de Datos"***
 ## Importante
@@ -29,31 +29,31 @@ Para desarrollar la GUI necesitas instalar **PyQt5** usando el siguiente comando
 Para crear la Base de datos necesitaremos MariaDB o en su defecto MySQL 4.04 en adelante. Esto se recomienda ya que se usa el cifrado AES que esta disponible desde la versión 4.04 en adelante en el gestor de Base de Datos MySQL y MariaDB, ingrese los siguientes comandos dentro de la consola de MySQL o MariaDB
 
 ### Creación de la Base de Datos
-```
+```sql
 CREATE DATABASE aplicacion;
 USE aplicacion;
 ```
 ### Creación de usuario
 Hasta el momento hemos trabajado con el usuario *root* lo cual supone ciertos peligros y limitantes a la hora de trabajar con varias personas.
-```
+```sql
 GRANT USAGE ON *.* TO 'usuario'@'%' IDENTIFIED BY 'contraseña';
 ```
 Lo que hacemos es crear un usuario el cual va a tener acceso a la base de datos y de esta manera no usar el *root*.
-```
+```sql
 GRANT ALL privileges ON `aplicacion`.* TO 'usuario'@'%';
 ```
 Para terminar de guardar los cambios solo ejecutamos la siguiente linea:
-```
+```sql
 FLUSH PRIVILEGES;
 ```
 Ahora ya podemos iniciar MariaDB o MySQL con su nuevo usuario con el comando `mysql -u usuario -p contraseña`
 ### Creación de la Tabla para los usuarios
-```
+```sql
 CREATE TABLE usuarios( id_usuario INTEGER NOT NULL, usuario VARCHAR(20) NOT NULL, clave VARCHAR(50) NOT NULL ) ENGINE= 'InnoDB' DEFAULT CHAR SET= latin1;
 ```
 
 ### Creación de la Tabla para los productos
-```
+```sql
 CREATE TABLE productos( id INTEGER(11), nombre VARCHAR(30), cantidad INTEGER(11), precio FLOAT);
 ```
 ## Esquema de la Base de Datos
@@ -94,8 +94,8 @@ MariaDB [aplicacion]> DESCRIBE usuarios;
 ## Configuración
 Para configurar la conexión con base de datos debemos configurar el archivo `db_connect.py`, este archivo contiene la configuración para la base de datos, el usuario y las credenciales para acceder a la misma
 
-    ```
-    import mariadb #Este es el modulo de conexión (MariaDB)
+```python
+				import mariadb #Este es el modulo de conexión (MariaDB)
     
     class conexion:
         #Verificacion de usuario
@@ -106,7 +106,7 @@ Para configurar la conexión con base de datos debemos configurar el archivo `db
                 host="localhost", #El lugar de la base de datos localhost=127.0.0.1 o alguna otra.
                 database="aplicacion" #Nombre de la base de Datos a usar.
                 )
-    ```
+```
 # Errores
 
 ## Error (101)
