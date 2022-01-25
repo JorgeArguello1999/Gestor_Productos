@@ -1,23 +1,41 @@
-# Gestor de Productos 
-## ¿Que es?
+﻿# Gestor de Productos 
 ![Gestor de Productos](web/Images/logo.png)
 
+ - [¿Que es?](#que-es)
+	 - [Forma de Uso](#forma-de-uso)
+ - [Instalación](#instalación)
+	 - [Importante](#importante)
+	 - [Creación de la Base de Datos](#creación-de-la-base-de-datos)
+	 - [Esquema de la Base de Datos](#esquema-de-la-base-de-datos)
+	 - [Configuración de Python](#configuración)
+ - [Errores](#errores)
+
+# ¿Que es?
 */Actualmente esta es la versión 2.0, se han corregido la mayor parte de problemas para crear una base fuerte la cual permita añadir funcionalidades a futuro/*
 
 Una herramienta destinada al manejo de productos y mercancía de forma sencilla y fácil, orientada a personas sin conocimientos en informática. Creada con el principal objetivo de poder utilizarse en casi cualquier dispositivo. 
 Teniendo el software en tres presentaciones **CLI**,  **GUI**, **Web** y **APK**, con la finalidad de poder tener un control amplio de sus productos y mercancía.
 ## Forma de Uso
-### CLI: 
-Para usar el CLI debemos ejecutar el comando ` python3 cli.py ` Posteriormente nos pedirá que ingresemos el usuario y contraseña esto se configuro en la INSTALACIÓN por defecto tenemos que esta es "Juan" y la contraseña es "Pilancho".
-Teniendo la posibilidad de realizar las siguiente opciones
+### CLI y GUI:
+**Esta forma de uso esta disponible en caso de que se use desde el código fuente** 
+Para usar el CLI debemos ejecutar el comando ` python3 cli.py ` o ejecutar `python3 main_gui.py` para la versión GUI. Posteriormente nos pedirá que ingresemos el usuario y contraseña esto se configuro en la INSTALACIÓN por defecto tenemos que esta es "Juan" y la contraseña es "Pilancho".
+Teniendo la posibilidad de realizar las siguiente opciones.
 
  1. Listar Artículos
  2. Insertar Artículos
  3. Editar Artículos
  4. Eliminar Artículos
 
-![CLI Screnshoot del programa en ejecución](web/Images/GPcli1.png)
-![CLI Screnshoot del programa en ejecución](web/Images/GPcli2.png)
+#### CLI (Screenshots)
+![CLI Screenshoot del programa en ejecución](web/Images/GPcli1.png)
+![CLI Screneshoot del programa en ejecución](web/Images/GPcli2.png)
+#### GUI (Screenshots)
+![GUI Screenshot del programa en ejecución](web/Images/GPgui1.png)
+![GUI Screenshot del programa en ejecución](web/Images/GPgui2.png)
+### Web:
+A diferencia de las anteriores  formas de uso, la aplicación web aun no se a completado pero se espera que pronto lo este, en comparacion con las otras versiones esta se ejecutara en el navegador y se conectara a una base de datos local para su uso.
+### APK*(Android)*:
+Aún no esta listo.
 # Instalación
 Recuerde que debe tener de forma previa configurada una Base de Datos para almacenar lo mencionado. *Para esto leer el apartado de **"Creación de la Base de Datos"***
 ## Importante
@@ -91,11 +109,11 @@ MariaDB [aplicacion]> DESCRIBE usuarios;
 | clave      | varchar(50) | NO   |     | NULL    |       |
 +------------+-------------+------+-----+---------+-------+
 ```
-## Configuración
+## Configuración de Python
 Para configurar la conexión con base de datos debemos configurar el archivo `db_connect.py`, este archivo contiene la configuración para la base de datos, el usuario y las credenciales para acceder a la misma
 
 ```python
-				import mariadb #Este es el modulo de conexión (MariaDB)
+    import mariadb #Este es el modulo de conexión (MariaDB)
     
     class conexion:
         #Verificacion de usuario
