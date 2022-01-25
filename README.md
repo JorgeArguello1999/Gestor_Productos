@@ -1,4 +1,4 @@
-﻿# Gestor de Productos 
+# Gestor de Productos 
 ![Gestor de Productos](web/Images/logo.png)
 
  - [¿Que es?](#que-es)
@@ -7,7 +7,7 @@
 	 - [Importante](#importante)
 	 - [Creación de la Base de Datos](#creación-de-la-base-de-datos)
 	 - [Esquema de la Base de Datos](#esquema-de-la-base-de-datos)
-	 - [Configuración de Python](#configuración)
+	 - [Configuración de Python](#configuración-de-python)
  - [Errores](#errores)
 
 # ¿Que es?
