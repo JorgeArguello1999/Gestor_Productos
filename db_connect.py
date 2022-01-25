@@ -6,8 +6,8 @@ class conexion:
     #Verificacion de usuario
     def __init__(self):
         self.conn = mariadb.connect(
-            user="root",
-            password="",
+            user="jorge",
+            password="basededatos",
             host="localhost",
             database="aplicacion"
             )
