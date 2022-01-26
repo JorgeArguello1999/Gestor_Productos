@@ -8,7 +8,7 @@ class conexion:
         self.conn = mariadb.connect(
             user="jorge",
             password="basededatos",
-            host="localhost",
+            host="192.168.1.8",
             database="aplicacion"
             )
 
