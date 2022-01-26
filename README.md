@@ -38,6 +38,13 @@ A diferencia de las anteriores  formas de uso, la aplicación web aun no se a co
 Aún no esta listo.
 # Instalación
 Recuerde que debe tener de forma previa configurada una Base de Datos para almacenar lo mencionado. *Para esto leer el apartado de **"Creación de la Base de Datos"***
+## Instalación y Uso en Windows y Linux
+Para usar el software tenemos que hacer lo siguiente si tenemos git instalado pero en caso contrario, descargar el [codigo fuente](https://codeload.github.com/JorgeArguello1999/Gestor_Productos/zip/refs/heads/version.2).
+```bash
+git clone https://github.com/JorgeArguello1999/Gestor_Productos.git
+cd Gestor_Productos
+```
+Modificar el archivo `db_connect.py` y usarlo inicando el .bat o el ejecutable para Linux. 
 ## Importante
 Si desea desarrollar o ejecutar las ultimas versiones de *Gestor de Productos*, considere lo siguiente:
 
