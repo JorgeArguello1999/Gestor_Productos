@@ -20,11 +20,12 @@ class cli:
 
     def __init__(self):
         self.limpiador()
-        print("\nBienvenido al Sistema de Manejo de Productos(CLI)\n")
+        print("\nBienvenido al Sistema de Gestion de Productos(CLI)\n")
         print("""
-        ██▄██ ▄▀▄ █▄░█ █▀▀ ▀▀█ ▄▀▄ █▀▄ ▄▀▀▄ █▀▄
-        █░▀░█ █▄█ █▀██ █▀▀ ▄░█ █▄█ █░█ █░░█ █▀▄
-        ▀░░░▀ ▀░▀ ▀░░▀ ▀▀▀ ░▀░ ▀░▀ ▀▀░ ░▀▀░ ▀░▀ 
+               ▄▀▀ █▀▀ ▄▀▀ ▀█▀ ▄▀▀▄ █▀▄
+               █░█ █▀▀ ░▀▄ ░█░ █░░█ █▀▄
+               ░▀▀ ▀▀▀ ▀▀░ ░▀░ ░▀▀░ ▀░▀ 
+       
                        █▀▄ █▀▀
                        █░█ █▀▀
                        ▀▀░ ▀▀▀ 
@@ -107,7 +108,7 @@ class cli:
                     precio= float(input("Ingrese el precio del producto: "))
 
                     # Detector de elemento
-                    detector= pro.detector(codigo)
+                    detector= pro.detector(codigo, nombre)
                     if detector==True:
                         pro.editar(codigo, nombre, cantidad, precio)
                         print("El elemento a modificar existe\n") 
@@ -132,7 +133,7 @@ class cli:
                     entrada= input("Seguro quieres eliminar el contenido? (Si o No)")
 
                     # Detector de elemento
-                    detector= pro.detector(codigo)
+                    detector= pro.detector(codigo, nombre)
                     if entrada=="si" and detector==True or entrada=="Si":
                         pro.eliminar(codigo, nombre)
                     else:
