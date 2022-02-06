@@ -17,15 +17,10 @@ class conexion:
     def verificador(self, user_name, password):
         cur = self.conn.cursor()
         clave= crypt.crypt(password, user_name)
+        # print(clave)
         #Reciviendo informacion y validando
         if user_name != None and password != None:
             cur.execute("SELECT * FROM usuarios WHERE usuario=? and clave=?", (user_name, clave))
-            for re in cur:
-                print(re[0])
-                print(re[1])
-                print(re[2])
-                print(re[3])
-
             for nombre in cur:
                 print("\nTus credenciales son correctas: ", nombre[1],"\n")
                 self.conn.close()
@@ -90,13 +85,9 @@ class productos(conexion):
 
 
 class usuarios(conexion):
-    def encriptacion(self, user_name, password):
-        clave= crypt.crypt(password, user_name)
-        return clave
-
     def insertar(self, id_usuario, user_name, password, area):
         cur= self.conn.cursor()
-        clave= self.encriptacion(password, user_name)        
+        clave= crypt.crypt(password, user_name)
         try:
             cur.execute( "INSERT INTO usuarios (id_usuario, usuario, clave, area) VALUES (?, ?, ?, ?);",(id_usuario, user_name, clave, area) )
             print("Se ingreso el usuario: ", user_name)
@@ -106,7 +97,7 @@ class usuarios(conexion):
     
     def eliminar(self, id_usuario, user_name, password, area):
         cur= self.conn.cursor()
-        clave= self.encriptacion(user_name, password)
+        clave= crypt.crypt(password, user_name)
         try:
             cur.execute( "DELETE FROM usuarios WHERE id_usuario=? and usuario=? and clave=? and area=?",(id_usuario, user_name, clave, area) )
             print("Se elimino el usuario: ", user_name)
@@ -116,7 +107,7 @@ class usuarios(conexion):
 
     def editar(self, id_usuario, user_name, password, area):
         cur= self.conn.cursor()
-        clave= self.encriptacion(password, user_name)
+        clave= crypt.crypt(password, user_name)
         try:
             cur.execute( "UPDATE usuarios SET id_usuario=?, usuario=?, clave=?, area=?", (id_usuario, user_name, clave, area) )
             print("Editado el usuario: ", user_name)
