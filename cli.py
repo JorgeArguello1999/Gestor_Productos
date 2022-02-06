@@ -140,4 +140,6 @@ class cli:
                         print("\nError (102) El elemento a eliminar no existe")
                     self.salida()
 
-cli()
+if __name__=='__main__':
+    cli()
+    

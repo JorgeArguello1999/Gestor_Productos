@@ -1,6 +1,7 @@
 # Este modulo es solo para la conexion de la base de datos
 #!/usr/bin/python
 import mariadb
+import crypt
 
 class conexion:
     #Verificacion de usuario
@@ -12,22 +13,26 @@ class conexion:
             database="aplicacion"
             )
 
+    # Solucionar no paso el login
     def verificador(self, user_name, password):
         cur = self.conn.cursor()
-
+        clave= crypt.crypt(password, user_name)
         #Reciviendo informacion y validando
         if user_name != None and password != None:
-    
-            respuesta= cur.execute("SELECT usuario FROM usuarios WHERE usuario=? and clave=?", (user_name,password))
-            for nombre in cur:
-                print("\nTus credenciales son correctas: ", nombre[0],"\n")
-                return True 
+            cur.execute("SELECT * FROM usuarios WHERE usuario=? and clave=?", (user_name, clave))
+            for re in cur:
+                print(re[0])
+                print(re[1])
+                print(re[2])
+                print(re[3])
 
-        self.conn.close()
+            for nombre in cur:
+                print("\nTus credenciales son correctas: ", nombre[1],"\n")
+                self.conn.close()
+                return True 
 
 #Modificamos la tabla de productos
 class productos(conexion):
-
     #Funcion que lista los contenidos
     def listar(self):
         cur= self.conn.cursor()
@@ -82,3 +87,39 @@ class productos(conexion):
         for i in salida:
             if i[0]==codigo or i[1]==nombre:
                 return True
+
+
+class usuarios(conexion):
+    def encriptacion(self, user_name, password):
+        clave= crypt.crypt(password, user_name)
+        return clave
+
+    def insertar(self, id_usuario, user_name, password, area):
+        cur= self.conn.cursor()
+        clave= self.encriptacion(password, user_name)        
+        try:
+            cur.execute( "INSERT INTO usuarios (id_usuario, usuario, clave, area) VALUES (?, ?, ?, ?);",(id_usuario, user_name, clave, area) )
+            print("Se ingreso el usuario: ", user_name)
+        except mariadb.Error as e: 
+            print(f"Error: {e}")
+        self.conn.commit()
+    
+    def eliminar(self, id_usuario, user_name, password, area):
+        cur= self.conn.cursor()
+        clave= self.encriptacion(user_name, password)
+        try:
+            cur.execute( "DELETE FROM usuarios WHERE id_usuario=? and usuario=? and clave=? and area=?",(id_usuario, user_name, clave, area) )
+            print("Se elimino el usuario: ", user_name)
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+        self.conn.commit()
+
+    def editar(self, id_usuario, user_name, password, area):
+        cur= self.conn.cursor()
+        clave= self.encriptacion(password, user_name)
+        try:
+            cur.execute( "UPDATE usuarios SET id_usuario=?, usuario=?, clave=?, area=?", (id_usuario, user_name, clave, area) )
+            print("Editado el usuario: ", user_name)
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+        self.conn.commit()
