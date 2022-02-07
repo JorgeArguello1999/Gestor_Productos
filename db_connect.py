@@ -13,7 +13,8 @@ class conexion:
             database="aplicacion"
             )
 
-    # Solucionar no paso el login
+    # Se piensa en eliminar este modulo ya que el modulo admin puede hacer el trabajo
+    """
     def verificador(self, user_name, password):
         cur = self.conn.cursor()
         clave= crypt.crypt(password, user_name)
@@ -23,6 +24,18 @@ class conexion:
             cur.execute("SELECT * FROM usuarios WHERE usuario=? and clave=?", (user_name, clave))
             for nombre in cur:
                 print("\nTus credenciales son correctas: ", nombre[1],"\n")
+                self.conn.close()
+                return True 
+    """ 
+    def admin(self, user_name, password):
+        cur= self.conn.cursor()
+        clave= crypt.crypt(password, user_name)
+        cur.execute("SELECT * FROM usuarios WHERE usuario=? and clave=?", (user_name, clave))
+        for admin in cur:
+            if admin[3]!='admin':
+                print("\nHola:", admin[1], "tus credenciales son correctas\n")
+            elif admin[3]=='admin':
+                print("\nHola:", admin[1], "eres un ADMIN\n")
                 self.conn.close()
                 return True 
 
@@ -85,6 +98,17 @@ class productos(conexion):
 
 
 class usuarios(conexion):
+    def detector(self, id_usuario, user_name, password, area):
+        cur= self.conn.cursor()
+        clave= crypt.crypt(password, user_name)
+        cur.execute("SELECT * FROM usuarios")
+        salida= cur.fetchall()
+        for i in salida:
+            if i[0]==id_usuario and i[1]==user_name and i[2]==clave and i[3]==area:
+                print("Existe")
+                return True
+
+
     def insertar(self, id_usuario, user_name, password, area):
         cur= self.conn.cursor()
         clave= crypt.crypt(password, user_name)
@@ -106,6 +130,7 @@ class usuarios(conexion):
         self.conn.commit()
 
     def editar(self, id_usuario, user_name, password, area):
+
         cur= self.conn.cursor()
         clave= crypt.crypt(password, user_name)
         try:
