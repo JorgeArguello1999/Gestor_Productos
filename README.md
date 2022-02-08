@@ -170,8 +170,9 @@ FLUSH PRIVILEGES;
 Ahora ya podemos iniciar MariaDB o MySQL con su nuevo usuario con el comando `mysql -u usuario -p contraseña`
 ### Creación de la Tabla para los usuarios
 ```sql
-CREATE TABLE usuarios( id_usuario INTEGER NOT NULL, usuario VARCHAR(20) NOT NULL, clave VARCHAR(50) NOT NULL ) ENGINE= 'InnoDB' DEFAULT CHAR SET= latin1;
+CREATE TABLE usuarios( id_usuario INTEGER NOT NULL, usuario VARCHAR(20) NOT NULL, clave VARCHAR(50) NOT NULL, area VARCHAR(50) NOT NULL ) ENGINE= 'InnoDB' DEFAULT CHAR SET= latin1;
 ```
+En la sección de Area, la unica anotación importante es que el usuario que tendra el Control y la gestión de usuarios es el usuario 'admin'
 
 ### Creación de la Tabla para los productos
 ```sql
@@ -190,6 +191,7 @@ Tablas:
        - **id_usuario** (INT NOT NULL) 
        - **usuario** (VARCHAR 20 NOT NULL) 
        - **clave** (VARCHAR 50 NOT NULL)
+       - **area** (VARCHAR 50 NOT NULL)
 
 Como debería verse las tablas creadas:
 ```
@@ -210,6 +212,7 @@ MariaDB [aplicacion]> DESCRIBE usuarios;
 | id_usuario | int(11)     | NO   |     | NULL    |       |
 | usuario    | varchar(20) | NO   |     | NULL    |       |
 | clave      | varchar(50) | NO   |     | NULL    |       |
+| area       | varchar(50) | NO   |     | NULL    |       |
 +------------+-------------+------+-----+---------+-------+
 ```
 ## Configuración de Python
