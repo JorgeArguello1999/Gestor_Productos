@@ -28,7 +28,7 @@ class ejemplo_Gui(QMainWindow):
 
         user= self.entrada_usuario.text()
         password= self.entrada_contrasena.text()
-        respuesta= self.con.verificador(user, password)
+        respuesta= self.con.admin(user, password)
 
         if respuesta==True:
             validacion="[ Autorizado ]"

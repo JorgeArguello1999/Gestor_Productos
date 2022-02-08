@@ -46,8 +46,10 @@ class cli:
             admin= con.admin(user, password)
             if admin==True:
                 self.admin()
-                # Iniciamos el modulo de listar
-        self.listador(True)
+                # Iniciamos el modulo de listar 
+                self.listador(True)
+            elif admin==False:
+                self.listador(False)
          
     def listador(self, respuesta):
         if respuesta==True:

@@ -9,7 +9,7 @@ class conexion:
         self.conn = mariadb.connect(
             user="jorge",
             password="basededatos",
-            host="192.168.1.8",
+            host="192.168.1.10",
             database="aplicacion"
             )
 
@@ -32,12 +32,16 @@ class conexion:
         clave= crypt.crypt(password, user_name)
         cur.execute("SELECT * FROM usuarios WHERE usuario=? and clave=?", (user_name, clave))
         for admin in cur:
-            if admin[3]!='admin':
-                print("\nHola:", admin[1], "tus credenciales son correctas\n")
-            elif admin[3]=='admin':
-                print("\nHola:", admin[1], "eres un ADMIN\n")
-                self.conn.close()
-                return True 
+            global respuesta
+            if user_name != None and password != None and admin[1]==user_name and admin[2]==clave:
+                if admin[3]!='admin':
+                    print("\nHola:", admin[1], "tus credenciales son correctas\n")
+                    respuesta=False
+                elif admin[3]=='admin':
+                    print("\nHola:", admin[1], "eres un ADMIN\n")
+                    self.conn.close()
+                    respuesta= True
+                return respuesta 
 
 #Modificamos la tabla de productos
 class productos(conexion):
