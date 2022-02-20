@@ -50,14 +50,14 @@ class usuarios(conexion):
             print(f"Error: {e}")
 
     # Modificar este segmento ya que mantiene la informacion añadir entradas para nuevos datos de usuario 
-    def editar(self, id_usuario, user_name, password, area):
+    def editar(self, id_usuario, user_name, new_user_name, password, area):
         cur= self.conn.cursor()
         clave= self.encriptador(user_name, password)
         detector= self.detector(id_usuario, user_name, clave, area)
         if detector==True:
             try: 
-                sql= "UPDATE usuarios SET id_usuario=%s, usuario=%s, clave=%s, area=%s"
-                cur.execute(sql, (id_usuario, user_name, clave, area))
+                sql= "UPDATE usuarios SET id_usuario=%s, usuario=%s, clave=%s, area=%s WHERE id_usuario=%s"
+                cur.execute(sql, (id_usuario, user_name, clave, area, id_usuario))
                 print(f"Usuario: {user_name} actualizado")
                 self.conn.commit()
                 return True
@@ -95,11 +95,19 @@ class productos(conexion):
         try:
             cur.execute("SELECT * FROM productos")
             for productos in cur:
-                print("ID: ", productos[0])
-                print("Nombre: ", productos[1])
-                print("Cantidad: ", productos[2])
-                print("Precio:  ", productos[3])
                 print("\n")
+                print(f"""
+            *-----------*-------------------------------------------*
+            | ID        | {productos[0]}
+            *-----------*-------------------------------------------*
+            | Nombre    | {productos[1]}
+            *-----------*-------------------------------------------*
+            | Cantidad  | {productos[2]}
+            *-----------*-------------------------------------------*
+            | Precio    | {productos[3]}
+            *-----------*-------------------------------------------*
+
+                        """)
         except pymysql.Error as e:
             print(f"Error: {e}")
 
@@ -117,13 +125,13 @@ class productos(conexion):
             print(f"Error: {e}")
 
     # Modificar para ingresar nueva información solo hacemos redundancia
-    def editar(self, codigo, nombre, cantidad, precio):
+    def editar(self, codigo, nombre, nuevo_nombre, nuevo_cantidad, nuevo_precio):
         cur= self.conn.cursor()
         detector= self.detector(codigo, nombre)
         try: 
             if detector==True:
                 sql= "UPDATE productos SET id=%s, nombre=%s, cantidad=%s, precio=%s WHERE id=%s"
-                cur.execute(sql, (codigo, nombre, cantidad, precio, codigo))
+                cur.execute(sql, (codigo, nuevo_nombre, nuevo_cantidad, nuevo_precio, codigo))
                 self.conn.commit()
                 print("Editado con exito")
                 return True
@@ -150,7 +158,7 @@ class productos(conexion):
             cur.execute(sql)
             salida= cur.fetchall()
             for productos in salida:
-                if productos[0]==codigo and productos[1]==nombre:
+                if productos[0]==codigo or productos[1]==nombre:
                     return True
         except pymysql.Error as e:
             print(f"Error: {e}")

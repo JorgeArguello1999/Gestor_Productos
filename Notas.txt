@@ -5,4 +5,5 @@
 * Hacer la pagina Web estatica para el Proyecto
 * Hacer la aplicacion Web
 * Se pospone la aplicacion de Android por la falta de ram
-
+* Manejo de Errores en CLI pasarlo al db_connect
+* Mejorar el manejo de las entradas de usuario en cli

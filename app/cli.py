@@ -105,8 +105,12 @@ class cli:
                     ▀░▀ ▀░▀ ░▀░ ▀▀▀ ░▀▀ ░▀▀░ ▀▀▀ ░▀▀░ ▀▀░ 
                 """)
                 pro.listar()
-                respuesta= self.menu("Insertar")
-                pro.editar(respuesta[0], respuesta[1], respuesta[2], respuesta[3])
+                codigo= input("Ingrese el codigo del producto a Editar: ")
+                nombre= input("Ingrese el nombre del producto a Editar: ")
+                print("-------------------------------------------------------")
+                print("Editando (Ingrese los nuevos datos) >> ADVERTENCIA NO CAMBIAR EL ID")
+                respuesta= self.menu("Editar")
+                pro.editar(codigo, nombre, respuesta[1], respuesta[2], respuesta[3])
                 self.salida()
 
             # Eliminar
@@ -165,20 +169,24 @@ class cli:
         if entrada==1:
             print("""
             1.- Insertar Usuarios
-            2.- Eliminar Usuarios
-            3.- Editar Usuarios
+            2.- Editar Usuarios
+            3.- Eliminar Usuarios
                     """)
             accion= int(input("Tu eleccion: "))
             if accion==1:
                 respuestas= self.menu_admin("Insertar")
                 con.insertar(respuestas[0], respuestas[1], respuestas[2], respuestas[3])
+            elif accion==3:
+                id_usuario= int(input("Ingrese el ID del usuario a Editar:  "))
+                user_name= input("Ingrese el nombre del usuario a Editar: ")
+                print("-----------------------------------------------------------------")
+                print("Inserte los datos del usuario a Editar >> ADVERTENCIA no cambiar el ID")
+                respuestas= self.menu_admin("Eliminar")
+                con.editar(id_usuario, user_name, respuestas[1], respuestas[2], respuestas[3])
             elif accion==2:
                 respuestas= self.menu_admin("Eliminar")
                 con.eliminar(respuestas[0], respuestas[1], respuestas[2], respuestas[3])
-            elif accion==3:
-                respuestas= self.menu_admin("Editar")
-                con.editar(respuestas[0], respuestas[1], respuestas[2], respuestas[3])
-        self.limpiador()
+            self.limpiador()
     
     def menu_admin(self, accion):
         id_usuario= input(f"Ingrese el ID del usuario a {accion}: ")
