@@ -49,7 +49,7 @@ class cli:
                 # Iniciamos el modulo de listar 
                 self.listador(True)
             elif admin==False:
-                self.listador(False)
+                self.listador(True)
          
     def listador(self, respuesta):
         if respuesta==True:
@@ -94,11 +94,7 @@ class cli:
                 cantidad= int(input("Ingrese cantidad de producto: "))
                 precio= float(input("Ingrese el precio del producto: "))
                 # Detector de elemento
-                detector= pro.detector(codigo, nombre)
-                if detector==True:
-                    print("Error (101) El elemento ya existe")
-                else:
-                    pro.insertar(codigo, nombre, cantidad, precio)
+                pro.insertar(codigo, nombre, cantidad, precio)
                 self.salida()
 
             # Editar
@@ -207,4 +203,3 @@ class cli:
 if __name__=='__main__':
     aplicacion= cli()
     aplicacion.main()
-    

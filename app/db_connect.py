@@ -43,11 +43,11 @@ class usuarios(conexion):
             sql= "INSERT INTO usuarios (id_usuario, usuario, clave, area) VALUES (%s, %s, %s, %s)"
             cur.execute(sql,(id_usuario, user_name, clave, area))
             print("Se ingreso el usuario: ", user_name)
+            self.conn.commit()
             return True
         # En caso de ocurrir un Error
         except pymysql.Error as e: 
             print(f"Error: {e}")
-        self.conn.commit()
 
     # Modificar este segmento ya que mantiene la informacion añadir entradas para nuevos datos de usuario 
     def editar(self, id_usuario, user_name, password, area):
@@ -59,6 +59,7 @@ class usuarios(conexion):
                 sql= "UPDATE usuarios SET id_usuario=%s, usuario=%s, clave=%s, area=%s"
                 cur.execute(sql, (id_usuario, user_name, clave, area))
                 print(f"Usuario: {user_name} actualizado")
+                self.conn.commit()
                 return True
             except pymysql.Error as e:
                 print(f"Error: {e}")
@@ -69,9 +70,10 @@ class usuarios(conexion):
         detector= self.detector(id_usuario, user_name, clave, area)
         if detector==True:
             try:
-                sql= "DELETE FROM usuarios WHERE id_usuario=? and usuario=%s and clave=%s and area=%s"
+                sql= "DELETE FROM usuarios WHERE id_usuario=%s and usuario=%s and clave=%s and area=%s"
                 cur.execute(sql, (id_usuario, user_name, clave, area))
                 print(f"Se elimino el usuario: {user_name}")
+                self.conn.commit()
                 return True
             except pymysql.Error as e:
                 print(f"Error: {e}")
@@ -88,4 +90,67 @@ class usuarios(conexion):
             print(f"Error: {e}")
 
 class productos(conexion):
-    pass
+    def listar(self):
+        cur=self.conn.cursor()
+        try:
+            cur.execute("SELECT * FROM productos")
+            for productos in cur:
+                print("ID: ", productos[0])
+                print("Nombre: ", productos[1])
+                print("Cantidad: ", productos[2])
+                print("Precio:  ", productos[3])
+                print("\n")
+        except pymysql.Error as e:
+            print(f"Error: {e}")
+
+    def insertar(self, codigo, nombre, cantidad, precio):
+        cur= self.conn.cursor()
+        detector= self.detector(codigo, nombre)
+        try:
+            if detector!=True:
+                sql= "INSERT INTO productos (id, nombre, cantidad, precio) VALUES (%s, %s, %s, %s)"
+                cur.execute(sql, (codigo, nombre, cantidad, precio))
+                self.conn.commit()
+                print("Realizado con exito")
+                return True
+        except pymysql.Error as e:
+            print(f"Error: {e}")
+
+    # Modificar para ingresar nueva información solo hacemos redundancia
+    def editar(self, codigo, nombre, cantidad, precio):
+        cur= self.conn.cursor()
+        detector= self.detector(codigo, nombre)
+        try: 
+            if detector==True:
+                sql= "UPDATE productos SET id=%s, nombre=%s, cantidad=%s, precio=%s WHERE id=%s"
+                cur.execute(sql, (codigo, nombre, cantidad, precio, codigo))
+                self.conn.commit()
+                print("Editado con exito")
+                return True
+        except pymysql.Error as e:
+            print(f"Error: {e}")
+
+    def eliminar(self, codigo, nombre):
+        cur= self.conn.cursor()
+        detector= self.detector(codigo, nombre)
+        try:
+            if detector==True:
+                sql= "DELETE FROM productos WHERE id=%s and nombre=%s"
+                cur.execute(sql, (codigo, nombre))
+                print("Eliminado con exito")
+                self.conn.commit()
+                return True
+        except pymysql.Error as e:
+            print(f"Error: {e}")
+
+    def detector(self, codigo, nombre):
+        cur= self.conn.cursor()
+        try:
+            sql= "SELECT * FROM productos"
+            cur.execute(sql)
+            salida= cur.fetchall()
+            for productos in salida:
+                if productos[0]==codigo and productos[1]==nombre:
+                    return True
+        except pymysql.Error as e:
+            print(f"Error: {e}")
