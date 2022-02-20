@@ -1,6 +1,9 @@
-import db_connect
+import sys
 import os
 import getpass
+# Establecemos un path de python para la estructura de paquetes
+sys.path.insert(0, "/home/jorge/personal/Gestor_Productos/app")
+from Conectors import db_connect
 
 
 class cli:
