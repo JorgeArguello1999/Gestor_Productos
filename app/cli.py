@@ -89,12 +89,8 @@ class cli:
                     ▀░▀ ▀░▀ ░▀░ ▀▀▀ ░▀▀ ░▀▀░ ▀▀▀ ░▀▀░ ▀▀░ 
                 """)
                 pro.listar()
-                codigo= int(input("Ingrese el codigo del producto: "))
-                nombre= input("Ingresa el nombre del producto: ")
-                cantidad= int(input("Ingrese cantidad de producto: "))
-                precio= float(input("Ingrese el precio del producto: "))
-                # Detector de elemento
-                pro.insertar(codigo, nombre, cantidad, precio)
+                respuesta= self.menu("Insertar")
+                pro.insertar(respuesta[0], respuesta[1], respuesta[2], respuesta[3])
                 self.salida()
 
             # Editar
@@ -109,18 +105,8 @@ class cli:
                     ▀░▀ ▀░▀ ░▀░ ▀▀▀ ░▀▀ ░▀▀░ ▀▀▀ ░▀▀░ ▀▀░ 
                 """)
                 pro.listar()
-                codigo= int(input("Ingresa el codigo del producto: "))
-                nombre= input("Ingresa el nombre del producto: ")
-                cantidad= int(input("Ingrese cantidad de producto: "))
-                precio= float(input("Ingrese el precio del producto: "))
-
-                # Detector de elemento
-                detector= pro.detector(codigo, nombre)
-                if detector==True:
-                    pro.editar(codigo, nombre, cantidad, precio)
-                    print("El elemento a modificar existe\n") 
-                else:
-                    print("\nError (103) El elemento a modificar no existe")
+                respuesta= self.menu("Insertar")
+                pro.editar(respuesta[0], respuesta[1], respuesta[2], respuesta[3])
                 self.salida()
 
             # Eliminar
@@ -137,15 +123,27 @@ class cli:
                 codigo= int(input("Ingresa el ID del producto: ") )
                 nombre= input("Ingresa el nombre del producto: ")
                     
-                entrada= input("Seguro quieres eliminar el contenido? (Si o No)")
-
-                # Detector de elemento
-                detector= pro.detector(codigo, nombre)
-                if entrada=="si" and detector==True or entrada=="Si":
+                entrada= input("Seguro quieres eliminar el contenido? (Si o No): ")
+                if entrada=="si" or entrada=="Si":
                     pro.eliminar(codigo, nombre)
-                else:
-                    print("\nError (102) El elemento a eliminar no existe")
+
                 self.salida()
+
+    def menu(self, mensaje):
+        codigo= int(input(f"Ingresa el codigo del producto a {mensaje}: "))
+        nombre= input(f"Ingresa el nombre del producto a {mensaje}: ")
+        cantidad= int(input(f"Ingrese cantidad de producto a {mensaje}: "))
+        precio= float(input(f"Ingrese el precio del producto a {mensaje}: "))
+        respuestas=(
+                codigo,
+                nombre,
+                cantidad,
+                precio,
+                )
+        return respuestas
+        
+
+
 
     def admin(self):
         self.limpiador()
@@ -172,21 +170,17 @@ class cli:
                     """)
             accion= int(input("Tu eleccion: "))
             if accion==1:
-                respuestas= self.menu("Insertar")
+                respuestas= self.menu_admin("Insertar")
                 con.insertar(respuestas[0], respuestas[1], respuestas[2], respuestas[3])
             elif accion==2:
-                respuestas= self.menu("Eliminar")
-                detector= con.detector(respuestas[0], respuestas[1], respuestas[2], respuestas[3])
-                if detector==True:
-                    con.eliminar(respuestas[0], respuestas[1], respuestas[2], respuestas[3])
+                respuestas= self.menu_admin("Eliminar")
+                con.eliminar(respuestas[0], respuestas[1], respuestas[2], respuestas[3])
             elif accion==3:
-                respuestas= self.menu("Editar")
-                detector= con.detector(respuestas[0], respuestas[1], respuestas[2], respuestas[3])
-                if detector==True:
-                    con.editar(respuestas[0], respuestas[1], respuestas[2], respuestas[3])
+                respuestas= self.menu_admin("Editar")
+                con.editar(respuestas[0], respuestas[1], respuestas[2], respuestas[3])
         self.limpiador()
     
-    def menu(self, accion):
+    def menu_admin(self, accion):
         id_usuario= input(f"Ingrese el ID del usuario a {accion}: ")
         user_name= input(f"Ingrese el nombre del usuario a {accion}: ")
         password= input(f"Ingrese la contraseña del usuario a {accion}: ")
