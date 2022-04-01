@@ -6,8 +6,8 @@ from pymysql.err import Error
 class conexion:
     def __init__(self):
         self.conn= pymysql.connect(
-                host= '127.0.0.1',
-                user= 'jorge',
+                host= '192.168.1.13',
+                user= 'root',
                 password= 'basededatos',
                 database= 'aplicacion',
                 )
@@ -94,7 +94,8 @@ class productos(conexion):
         cur=self.conn.cursor()
         try:
             cur.execute("SELECT * FROM productos")
-            for productos in cur:
+            salida= cur.fetchall()
+            for productos in salida:
                 print("\n")
                 print(f"""
             *-----------*-------------------------------------------*
@@ -108,6 +109,7 @@ class productos(conexion):
             *-----------*-------------------------------------------*
 
                         """)
+                return salida
         except pymysql.Error as e:
             print(f"Error: {e}")
 
