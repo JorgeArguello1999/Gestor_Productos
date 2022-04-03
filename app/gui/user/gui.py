@@ -23,6 +23,9 @@ class user(QMainWindow):
         # Boton Login
         self.boton_registro.clicked.connect(self.login)
 
+    def login(self):
+        print("Login")
+
 app= QApplication(sys.argv)
 GUI= user()
 GUI.show()

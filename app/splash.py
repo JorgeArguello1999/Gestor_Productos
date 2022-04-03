@@ -1,4 +1,3 @@
-import gui.user.gui as user
 
 import sys
 from PyQt5.QtWidgets import QApplication, QLabel
@@ -11,4 +10,4 @@ lbl.show()
 QTimer.singleShot(10000,app.quit)
 sys.exit(app.exec())
 
-val= user()
+# val= user()
