@@ -6,7 +6,7 @@ from PyQt5 import uic
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QApplication, QLineEdit
 
-class admin(QMainWindow):
+class user(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi("gui/admin/normal_user.ui", self)
@@ -23,10 +23,7 @@ class admin(QMainWindow):
         # Boton Login
         self.boton_registro.clicked.connect(self.login)
 
-
-
-# Ejecutamos la aplicacion
 app= QApplication(sys.argv)
-GUI= admin() 
+GUI= user()
 GUI.show()
 sys.exit(app.exec_())
