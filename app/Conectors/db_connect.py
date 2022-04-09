@@ -95,6 +95,7 @@ class productos(conexion):
         try:
             cur.execute("SELECT * FROM productos")
             salida= cur.fetchall()
+            datos=[]
             for productos in salida:
                 print("\n")
                 print(f"""
@@ -107,9 +108,9 @@ class productos(conexion):
             *-----------*-------------------------------------------*
             | Precio    | {productos[3]}
             *-----------*-------------------------------------------*
-
                         """)
-                return salida
+                datos.append(productos)
+            return datos 
         except pymysql.Error as e:
             print(f"Error: {e}")
 

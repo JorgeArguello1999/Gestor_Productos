@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QLineEdit
 class ejemplo_Gui(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("gui/admin/normal_user.ui", self)
+        uic.loadUi("gui/user/normal_user.ui", self)
         # Deshabilitamos los frames 
         self.frame_Listar.setEnabled(False)
         self.frame_Opciones.setEnabled(False)
@@ -22,7 +22,6 @@ class ejemplo_Gui(QMainWindow):
 
         # Boton Login
         self.boton_registro.clicked.connect(self.login)
-
 
     def login(self):
         # Llamamos a la funcion de verificacion de la Base de 
@@ -173,6 +172,10 @@ class ejemplo_Gui(QMainWindow):
             except:
                 self.mensaje_eliminar.setText(" [Error ID no Seleccionado] ")
 
+app= QApplication(sys.argv)
+GUI= ejemplo_Gui()
+GUI.show()
+sys.exit(app.exec_())
 """
 if __name__=="__main__":
     app= QApplication(sys.argv)
@@ -180,7 +183,4 @@ if __name__=="__main__":
     GUI.show()
     sys.exit(app.exec_())
 """
-app= QApplication(sys.argv)
-GUI= ejemplo_Gui()
-GUI.show()
-sys.exit(app.exec_())
+
