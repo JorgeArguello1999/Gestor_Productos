@@ -52,7 +52,7 @@ class ejemplo_Gui(QMainWindow):
         datos= self.pro.listar()
         print(datos)
         row=0
-        self.tabla_productos.setRowCount(len(datos[1]))
+        self.tabla_productos.setRowCount(len(datos[0]))
         for producto in datos:
             self.tabla_productos.setItem(row, 0, QtWidgets.QTableWidgetItem(str(producto[0])))
             self.tabla_productos.setItem(row, 1, QtWidgets.QTableWidgetItem(str(producto[1])))

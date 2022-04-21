@@ -110,6 +110,7 @@ class productos(conexion):
             *-----------*-------------------------------------------*
                         """)
                 datos.append(productos)
+            print(datos)
             return datos 
         except pymysql.Error as e:
             print(f"Error: {e}")
