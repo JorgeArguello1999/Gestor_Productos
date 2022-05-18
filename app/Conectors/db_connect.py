@@ -5,6 +5,7 @@ from pymysql.err import Error
 
 class conexion:
     def __init__(self):
+        # Configurar esta parte para que sea facilmente cambiable
         self.conn= pymysql.connect(
                 host= '192.168.1.13',
                 user= 'root',
@@ -13,6 +14,8 @@ class conexion:
                 )
 
     def encriptador(self, user_name, password):
+        # Este modulo debe ser modificado para que sea usable desde cualquier sistema operativo
+        # El modulo crypt solo esta disponible para sistemas UNIX, windows no funciona
         return crypt.crypt(password, user_name)
 
     def admin(self, user_name, password):
