@@ -1,24 +1,26 @@
 # Gestor de Productos 
-![Gestor de Productos](web/Images/logo.png)
+<p style="text-align: center; width: 300px"><img src=web/Images/logo.png></p>
 
  - [¿Que es?](#que-es)
 	 - [Forma de Uso](#forma-de-uso)
  - [Instalación](#instalación)
 	 - [Importante](#importante)
+     - [Instalación de la Base de Datos](#instalación-de-mariadb-y-mysql)
+     - [Docker](#docker)
 	 - [Creación de la Base de Datos](#creación-de-la-base-de-datos)
 	 - [Esquema de la Base de Datos](#esquema-de-la-base-de-datos)
 	 - [Configuración de Python](#configuración-de-python)
  - [Errores](#errores)
 
 # ¿Que es?
-*/Actualmente esta es la versión 2.0, se han corregido la mayor parte de problemas para crear una base fuerte la cual permita añadir funcionalidades a futuro/*
+*/Actualmente esta es la versión 2.1, se han corregido la mayor parte de problemas para crear una base fuerte la cual permita añadir funcionalidades a futuro/*
 
 Una herramienta destinada al manejo de productos y mercancía de forma sencilla y fácil, orientada a personas sin conocimientos en informática. Creada con el principal objetivo de poder utilizarse en casi cualquier dispositivo. 
 Teniendo el software en tres presentaciones **CLI**,  **GUI**, **Web** y **APK**, con la finalidad de poder tener un control amplio de sus productos y mercancía.
 ## Forma de Uso
-### CLI y GUI:
+### CLI, GUI y APK (Aplicación Movil):
 **Esta forma de uso esta disponible en caso de que se use desde el código fuente** 
-Para usar el CLI debemos ejecutar el comando ` python3 cli.py ` o ejecutar `python3 main_gui.py` para la versión GUI. Posteriormente nos pedirá que ingresemos el usuario y contraseña esto se configuro en la INSTALACIÓN por defecto tenemos que esta es "Juan" y la contraseña es "Pilancho".
+Para usar el CLI debemos ejecutar el comando ` python3 cli.py ` o ejecutar `python3 splash.py` para la versión GUI. Posteriormente nos pedirá que ingresemos el usuario y contraseña esto se configuro en la INSTALACIÓN por defecto tenemos que esta es "Juan" y la contraseña es "Pilancho".
 Teniendo la posibilidad de realizar las siguiente opciones.
 
  1. Listar Artículos
@@ -30,12 +32,13 @@ Teniendo la posibilidad de realizar las siguiente opciones.
 ![CLI Screenshoot del programa en ejecución](web/Images/GPcli1.png)
 ![CLI Screneshoot del programa en ejecución](web/Images/GPcli2.png)
 #### GUI (Screenshots)
+Para usar la Interfaz grafica, primero debe ingresar el usuario en el recuadro requerido, para luego acceder a la parte de administración, esto dependera si tu usuario es Administrador, solo si esto fuera cierto,accederia al menú correspondiente al Administrador.
 ![GUI Screenshot del programa en ejecución](web/Images/GPgui1.png)
 ![GUI Screenshot del programa en ejecución](web/Images/GPgui2.png)
 ### Web:
 A diferencia de las anteriores  formas de uso, la aplicación web aun no se a completado pero se espera que pronto lo este, en comparacion con las otras versiones esta se ejecutara en el navegador y se conectara a una base de datos local para su uso.
-### APK*(Android)*:
-Aún no esta listo.
+### APK (Android):
+Aplicación con la cual se pueda usar el gestor de productos desde el movil, por el momento va a estar disponible solo para android por lo cual esta seria una limitante, da servicio desde Android 5.0 en adelante, así que versiones inferiores serian incompatibles. 
 # Instalación
 Recuerde que debe tener de forma previa configurada una Base de Datos para almacenar lo mencionado. *Para esto leer el apartado de **"Creación de la Base de Datos"***
 ## Instalación y Uso en Windows y Linux
@@ -54,12 +57,16 @@ Para desarrollar la GUI necesitas instalar **PyQt5** usando el siguiente comando
 Para desarrollar la aplicación usted necesitara disponer de las siguientes aplicaciones en su computador u ordenador:
  - **Base de Datos**
      - **MariaDB** 
+     - **MySQL** 
+     - **SQLite** (Opcional solo para android en caso de no existir un servidor principal)
  - **Conectores y QtDesigner**
      - **mariadb** (Conector de MariaDB con Python)
      - **PyInstaller** (Crear ejecutables de la apliación)
      - **PyQt5** (Conjunto de librearias Qt para desarrollo)
      - **PyQt5-tools** (Herramienta gráfica para desarrollo del entorno gráfico Qt)
+     - **pymysql** (Conector de MySQL con Python)
 
+## Instalación de MariaDB y MySQL
 Instalación y configuración de base de datos MariaDB
 ```bash
 # Debian
@@ -146,7 +153,39 @@ Crear ejecutable (Dependiendo el Sistema Operativo compilara un .EXE o un .DMG)
 pyinstaller --clean --onefile --windowed archivo.py #CLI o GUI
 ```
 
-## Creación de la Base de datos
+## Docker
+El uso de docker es el plan original, usarlo con una instancia, con un volumen permanente para tener una base de datos portable y que el programa pueda ser escalable a futuro
+
+```bash
+# Debian
+sudo apt install docker
+
+# Arch 
+sudo pacman -Sy docker
+
+# Windows 
+Para el caso de Windows descargarlo desde su pagina oficial
+```
+Para usar docker realizar los siguientes comandos:
+
+/*Esto se encuentra provisional hasta crear una imagen propia para la aplicación*/ 
+```bash
+bash docker.sh
+
+Elije el Gestor de Base de Datos que desees usar: 
+MariaDB: 1
+MySQL: 2
+Elección: 1
+----------------------------------------------------------
+La contraseña root se ha establecido por defecto
+Ingrese el nombre del usuario DB: #Usuario
+Ingrese contraseña para el usuario: #Contraseña
+----------------------------------------------------------
+MariaDB
+MySQL
+```
+
+## Creación de la Base de datos 
 Para crear la Base de datos necesitaremos MariaDB o en su defecto MySQL 4.04 en adelante. Esto se recomienda ya que se usa el cifrado AES que esta disponible desde la versión 4.04 en adelante en el gestor de Base de Datos MySQL y MariaDB, ingrese los siguientes comandos dentro de la consola de MySQL o MariaDB
 
 ### Creación de la Base de Datos

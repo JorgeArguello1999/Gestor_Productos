@@ -13,7 +13,7 @@ class ejemplo_Gui(QMainWindow):
         # Deshabilitamos los frames 
         self.frame_Listar.setEnabled(False)
         self.frame_Opciones.setEnabled(False)
-        
+
         # Modificamos los tamaños de la tabla
         self.tabla_productos.setColumnWidth(0,50)
         self.tabla_productos.setColumnWidth(1,200)
