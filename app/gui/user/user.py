@@ -25,7 +25,7 @@ class ejemplo_Gui(QMainWindow):
 
     def login(self):
         # Llamamos a la funcion de verificacion de la Base de 
-        self.con=db_connect.conexion()
+        self.con=db_connect.Conexion()
 
         user= self.entrada_usuario.text()
         password= self.entrada_contrasena.text()

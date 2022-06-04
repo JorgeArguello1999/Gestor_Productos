@@ -16,11 +16,11 @@ echo "------------------------------------------------------------------------"
 if [[ $eleccion -eq 1 ]]
 then
 	echo "MariaDB"
-	docker run --detach --name gestor_productos --env MARIADB_USER=$usuario --env MARIADB_PASSWORD=$password --env MARIADB_ROOT_PASSWORD=root mariadb:latest 
+	docker run --detach -p 3306:3306 --name gestor_productos --env MARIADB_USER=$usuario --env MARIADB_PASSWORD=$password --env MARIADB_ROOT_PASSWORD=root mariadb:latest 
 	docker exec -it gestor_productos mysql -u $usuario -p 
 else
 	echo "MySQL"
-	docker run --name gestor_productos -e MYSQL_ROOT_PASSWORD=root -d mysql:tag
+	docker run -v ~/personal/Gestor_Productos/docker_DB:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 --name gestor_productos -d mysql
 	docker exec -it gestor_productos mysql -u root -p
 fi
 

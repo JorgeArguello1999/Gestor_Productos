@@ -1,5 +1,5 @@
 # Gestor de Productos 
-<p style="text-align: center; width: 300px"><img src=web/Images/logo.png></p>
+![Logo de la Aplicación](web/Images/logo.png)
 
  - [¿Que es?](#que-es)
 	 - [Forma de Uso](#forma-de-uso)
@@ -145,7 +145,7 @@ NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB
 
 Instalación de conectores mediante PIP (Gestor de paquetes de Python)
 ```bash
-pip install mariadb pyqt5 pyqt5-tools
+pip install mariadb pymysql pyqt5 pyqt5-tools
 ```
 
 Crear ejecutable (Dependiendo el Sistema Operativo compilara un .EXE o un .DMG)
@@ -170,19 +170,41 @@ Para usar docker realizar los siguientes comandos:
 
 /*Esto se encuentra provisional hasta crear una imagen propia para la aplicación*/ 
 ```bash
-bash docker.sh
 
-Elije el Gestor de Base de Datos que desees usar: 
-MariaDB: 1
-MySQL: 2
-Elección: 1
-----------------------------------------------------------
-La contraseña root se ha establecido por defecto
-Ingrese el nombre del usuario DB: #Usuario
-Ingrese contraseña para el usuario: #Contraseña
-----------------------------------------------------------
-MariaDB
-MySQL
+#!/bin/bash
+
+echo "Elije el Gestor de Base de Datos que desees usar: "
+echo "MariaDB: 1"
+echo "MySQL: 2"
+read -p "Elección: " eleccion
+
+echo "------------------------------------------------------------------------"
+
+echo "La contraseña root se ha establecido por defecto"
+read -p "Ingrese el nombre del usuario DB: " usuario
+read -sp "Ingrese contraseña para el usuario: " password
+
+echo "------------------------------------------------------------------------"
+
+# Configurar manualmente la ruta de los volumenes
+
+if [[ $eleccion -eq 1 ]]
+then
+    echo "MariaDB"
+    docker run -v ~/personal/Gestor_Productos/docker_DB:/var/lib/mysql --detach -p 3306:3306 --name gestor_productos --env MARIADB_USER=$usuario --env MARIADB_PASSWORD=$password --env MARIADB_ROOT_PASSWORD=root mariadb:latest
+
+    docker exec -it gestor_productos mysql -u $usuario -p 
+
+else
+    echo "MySQL"
+    docker run -v ~/personal/Gestor_Productos/docker_DB:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 --name gestor_productos -d mysql
+    
+    docker exec -it gestor_productos mysql -u root -p
+fi
+
+echo "------------------------------------------------------------------------"
+
+
 ```
 
 ## Creación de la Base de datos 
@@ -209,65 +231,77 @@ FLUSH PRIVILEGES;
 Ahora ya podemos iniciar MariaDB o MySQL con su nuevo usuario con el comando `mysql -u usuario -p contraseña`
 ### Creación de la Tabla para los usuarios
 ```sql
-CREATE TABLE usuarios( id_usuario INTEGER NOT NULL, usuario VARCHAR(20) NOT NULL, clave VARCHAR(50) NOT NULL, area VARCHAR(50) NOT NULL ) ENGINE= 'InnoDB' DEFAULT CHAR SET= latin1;
+CREATE TABLE usuarios( 
+    id_usuario INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+    usuario VARCHAR(20) NOT NULL, 
+    clave VARCHAR(50) NOT NULL, 
+    area VARCHAR(50) NOT NULL ) /*valores: admin, cajero, bodega*/
+    ENGINE= 'InnoDB' DEFAULT CHAR SET= latin1;
 ```
 En la sección de Area, la unica anotación importante es que el usuario que tendra el Control y la gestión de usuarios es el usuario 'admin'
 
 ### Creación de la Tabla para los productos
 ```sql
-CREATE TABLE productos( id INTEGER(11), nombre VARCHAR(30), cantidad INTEGER(11), precio FLOAT);
+CREATE TABLE productos( 
+    id INTEGER(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(30), 
+    cantidad INTEGER(11), 
+    precio FLOAT);
 ```
 ## Esquema de la Base de Datos
 Base de datos= "aplicacion"
 Tablas:
 
  - **productos**
-     - **id** (INT 11)
+     - **id** (INT 11 NOT NULL PRIMARY KEY AUTOINCREMENT)
      -  **nombre** (VARCHAR 30)
      - **cantidad** (INT 11)
      - **precio** (FLOAT)
   - **usuarios**
-       - **id_usuario** (INT NOT NULL) 
+       - **id_usuario** (INT NOT NULL PRIMARY KEY AUTOINCREMENT)
        - **usuario** (VARCHAR 20 NOT NULL) 
        - **clave** (VARCHAR 50 NOT NULL)
-       - **area** (VARCHAR 50 NOT NULL)
+       - **area** (VARCHAR 50 NOT NULL) *Acepta valores "admin, cajero, bodega"*
 
 Como debería verse las tablas creadas:
 ```
 MariaDB [aplicacion]> DESCRIBE productos;
-+----------+-------------+------+-----+---------+-------+
-| Field    | Type        | Null | Key | Default | Extra |
-+----------+-------------+------+-----+---------+-------+
-| id       | int(11)     | YES  |     | NULL    |       |
-| nombre   | varchar(30) | YES  |     | NULL    |       |
-| cantidad | int(11)     | YES  |     | NULL    |       |
-| precio   | float       | YES  |     | NULL    |       |
-+----------+-------------+------+-----+---------+-------+
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int         | NO   | PRI | NULL    | auto_increment |
+| nombre   | varchar(30) | YES  |     | NULL    |                |
+| cantidad | int         | YES  |     | NULL    |                |
+| precio   | float       | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+
 
 MariaDB [aplicacion]> DESCRIBE usuarios;
-+------------+-------------+------+-----+---------+-------+
-| Field      | Type        | Null | Key | Default | Extra |
-+------------+-------------+------+-----+---------+-------+
-| id_usuario | int(11)     | NO   |     | NULL    |       |
-| usuario    | varchar(20) | NO   |     | NULL    |       |
-| clave      | varchar(50) | NO   |     | NULL    |       |
-| area       | varchar(50) | NO   |     | NULL    |       |
-+------------+-------------+------+-----+---------+-------+
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| id_usuario | int         | NO   | PRI | NULL    | auto_increment |
+| usuario    | varchar(20) | NO   |     | NULL    |                |
+| clave      | varchar(50) | NO   |     | NULL    |                |
+| area       | varchar(50) | NO   |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+
 ```
 ## Configuración de Python
 Para configurar la conexión con base de datos debemos configurar el archivo `db_connect.py`, este archivo contiene la configuración para la base de datos, el usuario y las credenciales para acceder a la misma
 
 ```python
-    import mariadb #Este es el modulo de conexión (MariaDB)
+    import mariadb as database # Este es el modulo de conexión (MariaDB)
+    import pymysql as database # Modulo en caso de ser MySQL
     
-    class conexion:
-        #Verificacion de usuario
+    class Conexion:
+        # Verificacion de usuario
         def __init__(self):
             self.conn = mariadb.connect(
-                user="jorge", #Aqui colocamos el usuario para la base de datos
-                password="basededatos", #Contraseña para la misma
-                host="192.168.1.8", #El lugar de la base de datos localhost=127.0.0.1 o alguna otra.
-                database="aplicacion" #Nombre de la base de Datos a usar.
+                user="jorge", # Aqui colocamos el usuario para la base de datos
+                password="basededatos", # Contraseña para la misma
+                host="192.168.1.8", # El lugar de la base de datos localhost=127.0.0.1 o alguna otra.
+                database="aplicacion" # Nombre de la base de Datos a usar.
                 )
 ```
 # Errores

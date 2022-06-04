@@ -9,20 +9,20 @@ class conexion:
         self.conn= pymysql.connect(
                 host= '192.168.1.13',
                 user= 'root',
-                password= 'basededatos',
+                password= 'root',
                 database= 'aplicacion',
                 )
 
     def encriptador(self, user_name, password):
         # Este modulo debe ser modificado para que sea usable desde cualquier sistema operativo
         # El modulo crypt solo esta disponible para sistemas UNIX, windows no funciona
-        return crypt.crypt(password, user_name)
+        return (password, user_name)
 
     def admin(self, user_name, password):
         # Inicia la conexion
         cur= self.conn.cursor()
         # Encriptamos la clave a traves del metodo "encriptador"
-        clave= self.encriptador(user_name, password) 
+        clave= self.encriptador(user_name, password)
         # Hacemos la busqueda en la Base de Datos
         cur.execute("SELECT * FROM usuarios WHERE usuario=%s and clave=%s", (user_name, clave))
         # Comprobamos si es ADMIN
@@ -66,7 +66,7 @@ class usuarios(conexion):
                 return True
             except pymysql.Error as e:
                 print(f"Error: {e}")
-    
+
     def eliminar(self, id_usuario, user_name, password, area):
         cur= self.conn.cursor()
         clave= self.encriptador(user_name, password)
@@ -78,15 +78,15 @@ class usuarios(conexion):
                 print(f"Se elimino el usuario: {user_name}")
                 self.conn.commit()
                 return True
-            except pymysql.Error as e:
+            except Error as e:
                 print(f"Error: {e}")
 
-    def detector(self, id_usuario, user_name, clave, area):
+    def detector(self, user_name, clave, area):
         cur= self.conn.cursor()
         try:
             cur.execute("SELECT * FROM usuarios")
             for date in cur:
-                if date[0]==id_usuario and date[1]==user_name and date[2]==clave and date[3]==area:  
+                if date[1]==user_name and date[2]==clave and date[3]==area:
                     print("Existe")
                     return True
         except pymysql.Error as e:
