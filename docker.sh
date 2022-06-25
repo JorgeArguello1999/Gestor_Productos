@@ -18,6 +18,8 @@ then
 	echo "MariaDB"
 	docker run --detach -p 3306:3306 --name gestor_productos --env MARIADB_USER=$usuario --env MARIADB_PASSWORD=$password --env MARIADB_ROOT_PASSWORD=root mariadb:latest 
 	docker exec -it gestor_productos mysql -u $usuario -p 
+
+	# docker run -v ~/personal/Gestor_Productos/docker_DB:/var/lib/mysql -p 3306:3306 --detach --env MARIADB_USER=jorge --env MARIADB_PASSWORD=basededatos --env MARIADB_ROOT_PASSWORD=root mariadb 
 else
 	echo "MySQL"
 	docker run -v ~/personal/Gestor_Productos/docker_DB:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 --name gestor_productos -d mysql
