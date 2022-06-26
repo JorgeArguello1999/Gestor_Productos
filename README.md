@@ -230,7 +230,8 @@ CREATE TABLE usuarios(
     id_usuario INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT, 
     usuario VARCHAR(20) NOT NULL, 
     clave VARCHAR(50) NOT NULL, 
-    area VARCHAR(50) NOT NULL ) /*valores: admin, cajero, bodega*/
+    area VARCHAR(50) NOT NULL,
+    foto_usuario BLOB) /*valores: admin, cajero, bodega*/
     ENGINE= 'InnoDB' DEFAULT CHAR SET= latin1;
 ```
 En la sección de Area, la unica anotación importante es que el usuario que tendra el Control y la gestión de usuarios es el usuario 'admin'
@@ -241,7 +242,9 @@ CREATE TABLE productos(
     id INTEGER(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(30), 
     cantidad INTEGER(11), 
-    precio FLOAT);
+    precio FLOAT,
+    foto_producto BLOB)
+    ENGINE= 'InnoDB' DEFAULT CHAR SET= latin1;
 ```
 ## Esquema de la Base de Datos
 Base de datos= "aplicacion"
@@ -261,25 +264,26 @@ Tablas:
 Como debería verse las tablas creadas:
 ```
 MariaDB [aplicacion]> DESCRIBE productos;
-+----------+-------------+------+-----+---------+----------------+
-| Field    | Type        | Null | Key | Default | Extra          |
-+----------+-------------+------+-----+---------+----------------+
-| id       | int         | NO   | PRI | NULL    | auto_increment |
-| nombre   | varchar(30) | YES  |     | NULL    |                |
-| cantidad | int         | YES  |     | NULL    |                |
-| precio   | float       | YES  |     | NULL    |                |
-+----------+-------------+------+-----+---------+----------------+
-
++---------------+-------------+------+-----+---------+----------------+
+| Field         | Type        | Null | Key | Default | Extra          |
++---------------+-------------+------+-----+---------+----------------+
+| id            | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nombre        | varchar(30) | YES  |     | NULL    |                |
+| cantidad      | int(11)     | YES  |     | NULL    |                |
+| precio        | float       | YES  |     | NULL    |                |
+| foto_producto | blob        | YES  |     | NULL    |                |
++---------------+-------------+------+-----+---------+----------------+
 
 MariaDB [aplicacion]> DESCRIBE usuarios;
-+------------+-------------+------+-----+---------+----------------+
-| Field      | Type        | Null | Key | Default | Extra          |
-+------------+-------------+------+-----+---------+----------------+
-| id_usuario | int         | NO   | PRI | NULL    | auto_increment |
-| usuario    | varchar(20) | NO   |     | NULL    |                |
-| clave      | varchar(50) | NO   |     | NULL    |                |
-| area       | varchar(50) | NO   |     | NULL    |                |
-+------------+-------------+------+-----+---------+----------------+
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| id_usuario   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| usuario      | varchar(20) | NO   |     | NULL    |                |
+| clave        | varchar(50) | NO   |     | NULL    |                |
+| area         | varchar(50) | NO   |     | NULL    |                |
+| foto_usuario | blob        | YES  |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
 
 ```
 ## Configuración de Python
