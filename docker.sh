@@ -5,25 +5,23 @@ echo "MariaDB: 1"
 echo "MySQL: 2"
 read -p "Elección: " eleccion
 
-echo "------------------------------------------------------------------------"
-
-echo "La contraseña root se ha establecido por defecto"
-read -p "Ingrese el nombre del usuario DB: " usuario
-read -sp "Ingrese contraseña para el usuario: " password
-
-echo "------------------------------------------------------------------------"
-
 if [[ $eleccion -eq 1 ]]
 then
 	echo "MariaDB"
-	docker run --detach -p 3306:3306 --name gestor_productos --env MARIADB_USER=$usuario --env MARIADB_PASSWORD=$password --env MARIADB_ROOT_PASSWORD=root mariadb:latest 
-	docker exec -it gestor_productos mysql -u $usuario -p 
+	# MariaDB
+	docker run -v ~/personal/Gestor_Productos/docker_Mariadb_DB:/var/lib/mysql -p 3306:3306 --name gestor_productos --env MARIADB_USER=jorge --env MARIADB_PASSWORD=basededatos -d --env MARIADB_ROOT_PASSWORD=root mariadb
 
-	# docker run -v ~/personal/Gestor_Productos/docker_DB:/var/lib/mysql -p 3306:3306 --detach --env MARIADB_USER=jorge --env MARIADB_PASSWORD=basededatos --env MARIADB_ROOT_PASSWORD=root mariadb 
+	# EXEC
+	docker exec -it gestor_productos mysql -u jorge -p
+
 else
 	echo "MySQL"
-	docker run -v ~/personal/Gestor_Productos/docker_DB:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 --name gestor_productos -d mysql
+	# MySQL
+	docker run -v ~/personal/Gestor_Productos/docker_MySQL_DB:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 --name gestor_productos -d mysql
+
+	# EXEC
 	docker exec -it gestor_productos mysql -u root -p
+
 fi
 
 echo "------------------------------------------------------------------------"

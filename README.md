@@ -174,6 +174,9 @@ Para usar docker realizar los siguientes comandos:
 ```bash
 #!/bin/bash
 
+# ->>> IMPORTANTE CAMBIA LA UBICACION DEL VOLUMEN, COLOCA LA UBICACIÓN DE LA CARPETA 
+# ->>> "~/Escritorio/Gestor_Productos/docker_DB" lo cambias a tu ruta por ejemplo: "C:\\Users\UsuarioWindows\Escritorio\Gestor_Productos\docker_DB"
+
 # MariaDB
 docker run -v ~/Escritorio/Gestor_Productos/docker_DB:/var/lib/mysql -p 3306:3306 --name gestor_productos --env MARIADB_USER=jorge --env MARIADB_PASSWORD=basededatos -d --env MARIADB_ROOT_PASSWORD=root mariadb
 
