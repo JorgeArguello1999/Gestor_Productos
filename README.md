@@ -1,5 +1,5 @@
 # Gestor de Productos 
-![Logo de la Aplicación](web/Images/logo.png)
+![Logo de la Aplicación](Images/logo.png)
 
  - [¿Que es?](#que-es)
 	 - [Forma de Uso](#forma-de-uso)
@@ -29,12 +29,12 @@ Teniendo la posibilidad de realizar las siguiente opciones.
  4. Eliminar Artículos
 
 #### CLI (Screenshots)
-![CLI Screenshoot del programa en ejecución](web/Images/GPcli1.png)
-![CLI Screneshoot del programa en ejecución](web/Images/GPcli2.png)
+![CLI Screenshoot del programa en ejecución](Images/GPcli1.png)
+![CLI Screneshoot del programa en ejecución](Images/GPcli2.png)
 #### GUI (Screenshots)
 Para usar la Interfaz grafica, primero debe ingresar el usuario en el recuadro requerido, para luego acceder a la parte de administración, esto dependera si tu usuario es Administrador, solo si esto fuera cierto,accederia al menú correspondiente al Administrador.
-![GUI Screenshot del programa en ejecución](web/Images/GPgui1.png)
-![GUI Screenshot del programa en ejecución](web/Images/GPgui2.png)
+![GUI Screenshot del programa en ejecución](Images/GPgui1.png)
+![GUI Screenshot del programa en ejecución](Images/GPgui2.png)
 ### Web:
 A diferencia de las anteriores  formas de uso, la aplicación web aun no se a completado pero se espera que pronto lo este, en comparacion con las otras versiones esta se ejecutara en el navegador y se conectara a una base de datos local para su uso.
 ### APK (Android):
@@ -79,6 +79,7 @@ sudo mysql_secure_installation
 # Arch
 sudo systemctl stop mysqld 
 sudo pacman -Syu
+yay -S python-mariadb-connector
 sudo pacmna -S mariadb libmariadbclient mariadb-clients
 sudo mysql_secure_install_db --user=root --basedir=/usr --datadir=/var/lib/mysql
 
@@ -169,41 +170,22 @@ Para el caso de Windows descargarlo desde su pagina oficial
 Para usar docker realizar los siguientes comandos:
 
 /*Esto se encuentra provisional hasta crear una imagen propia para la aplicación*/ 
-```bash
 
+```bash
 #!/bin/bash
 
-echo "Elije el Gestor de Base de Datos que desees usar: "
-echo "MariaDB: 1"
-echo "MySQL: 2"
-read -p "Elección: " eleccion
+# MariaDB
+docker run -v ~/Escritorio/Gestor_Productos/docker_DB:/var/lib/mysql -p 3306:3306 --name gestor_productos --env MARIADB_USER=jorge --env MARIADB_PASSWORD=basededatos -d --env MARIADB_ROOT_PASSWORD=root mariadb
 
-echo "------------------------------------------------------------------------"
+# EXEC
+docker exec -it gestor_productos mysql -u jorge -p
+Enter password: basededatos
 
-echo "La contraseña root se ha establecido por defecto"
-read -p "Ingrese el nombre del usuario DB: " usuario
-read -sp "Ingrese contraseña para el usuario: " password
+# MySQL
+docker run -v ~/personal/Gestor_Productos/docker_DB:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 --name gestor_productos -d mysql
 
-echo "------------------------------------------------------------------------"
-
-# Configurar manualmente la ruta de los volumenes
-
-if [[ $eleccion -eq 1 ]]
-then
-    echo "MariaDB"
-    docker run -v ~/personal/Gestor_Productos/docker_DB:/var/lib/mysql --detach -p 3306:3306 --name gestor_productos --env MARIADB_USER=$usuario --env MARIADB_PASSWORD=$password --env MARIADB_ROOT_PASSWORD=root mariadb:latest
-
-    docker exec -it gestor_productos mysql -u $usuario -p 
-
-else
-    echo "MySQL"
-    docker run -v ~/personal/Gestor_Productos/docker_DB:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 --name gestor_productos -d mysql
-    
-    docker exec -it gestor_productos mysql -u root -p
-fi
-
-echo "------------------------------------------------------------------------"
-
+# EXEC
+docker exec -it gestor_productos mysql -u root -p
 
 ```
 
