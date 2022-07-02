@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend developer in NodeJS with Express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JorgeArguello1999/Gestor_Productos.git"
+  },
+  "keywords": [
+    "Backend",
+    "NodeJS",
+    "Express",
+    "Gestor_Productos"
+  ],
+  "author": "JorgeArguello1999",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JorgeArguello1999/Gestor_Productos/issues"
+  },
+  "homepage": "https://github.com/JorgeArguello1999/Gestor_Productos#readme"
+}
