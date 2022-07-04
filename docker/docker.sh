@@ -5,6 +5,9 @@ echo "MariaDB: 1"
 echo "MySQL: 2"
 read -p "Elección: " eleccion
 
+docker run --name phpmyadmin -d -e PMA_HOST=192.168.1.13 -p 8080:80 phpmyadmin
+echo "phpmyadmin corriendo en el puerto 8080"
+
 if [[ $eleccion -eq 1 ]]
 then
 	echo "MariaDB"

@@ -63,27 +63,6 @@ Para desarrollar la aplicación usted necesitara disponer de las siguientes apli
      - **PyQt5-tools** (Herramienta gráfica para desarrollo del entorno gráfico Qt)
      - **pymysql** (Conector de MySQL con Python)
 
-## Instalación de MariaDB y MySQL
-Instalación y configuración de base de datos MariaDB
-```bash
-# Debian
-sudo apt update
-sudo apt install mariadb-server -y
-sudo mysql_secure_installation
-```
-
-```bash
-# Arch
-sudo systemctl stop mysqld 
-sudo pacman -Syu
-yay -S python-mariadb-connector
-sudo pacmna -S mariadb libmariadbclient mariadb-clients
-sudo mysql_secure_install_db --user=root --basedir=/usr --datadir=/var/lib/mysql
-
-sudo systemctl start mariadb
-sudo mysql_secure_installation
-systemctl restart mariadb
-```
 
 Instalación de conectores mediante PIP (Gestor de paquetes de Python)
 ```bash
@@ -144,49 +123,8 @@ echo "------------------------------------------------------------------------"
 ```
 
 ## Creación de la Base de datos 
-Para crear la Base de datos necesitaremos MariaDB o en su defecto MySQL 4.04 en adelante. Esto se recomienda ya que se usa el cifrado AES que esta disponible desde la versión 4.04 en adelante en el gestor de Base de Datos MySQL y MariaDB, ingrese los siguientes comandos dentro de la consola de MySQL o MariaDB
+Para crear la Base de datos necesitaremos MariaDB o en su defecto MySQL 4.04 en adelante. Esto se recomienda ya que se usa el cifrado AES que esta disponible desde la versión 4.04 en adelante en el gestor de Base de Datos MySQL y MariaDB, ingrese los siguientes comandos dentro de la consola de MariaDB.
 
-### Creación de usuario
-Hasta el momento hemos trabajado con el usuario *root* lo cual supone ciertos peligros y limitantes a la hora de trabajar con varias personas.
-```sql
-GRANT USAGE ON *.* TO 'usuario'@'%' IDENTIFIED BY 'contraseña';
-```
-Lo que hacemos es crear un usuario el cual va a tener acceso a la base de datos y de esta manera no usar el *root*.
-### Creación de la Base de Datos
-```sql
-CREATE DATABASE aplicacion;
-USE aplicacion;
-```
-```sql
-GRANT ALL privileges ON `aplicacion`.* TO 'usuario'@'%';
-```
-Para terminar de guardar los cambios solo ejecutamos la siguiente linea:
-```sql
-FLUSH PRIVILEGES;
-```
-Ahora ya podemos iniciar MariaDB o MySQL con su nuevo usuario con el comando `mysql -u usuario -p contraseña`
-### Creación de la Tabla para los usuarios
-```sql
-CREATE TABLE usuarios( 
-    id_usuario INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT, 
-    usuario VARCHAR(20) NOT NULL, 
-    clave VARCHAR(50) NOT NULL, 
-    area VARCHAR(50) NOT NULL,
-    foto_usuario BLOB) /*valores: admin, cajero, bodega*/
-    ENGINE= 'InnoDB' DEFAULT CHAR SET= latin1;
-```
-En la sección de Area, la unica anotación importante es que el usuario que tendra el Control y la gestión de usuarios es el usuario 'admin'
-
-### Creación de la Tabla para los productos
-```sql
-CREATE TABLE productos( 
-    id INTEGER(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(30), 
-    cantidad INTEGER(11), 
-    precio FLOAT,
-    foto_producto BLOB)
-    ENGINE= 'InnoDB' DEFAULT CHAR SET= latin1;
-```
 ## Esquema de la Base de Datos
 Base de datos= "aplicacion"
 Tablas:
