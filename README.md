@@ -1,14 +1,12 @@
 # Gestor de Productos 
-![Logo de la Aplicación](Images/logo_48px.png)
+![Logo de la Aplicación](Images/logo.png)
 
  - [¿Que es?](#que-es)
 	 - [Forma de Uso](#forma-de-uso)
  - [Instalación](#instalación)
 	 - [Importante](#importante)
-     - [Instalación de la Base de Datos](#instalación-de-mariadb-y-mysql)
-     - [Docker](#docker)
-	 - [Creación de la Base de Datos](#creación-de-la-base-de-datos)
-	 - [Esquema de la Base de Datos](#esquema-de-la-base-de-datos)
+     - [Docker](./docker/README.md)
+     - [Base de Datos](./docker/README.md)
 	 - [Configuración de Python](#configuración-de-python)
  - [Errores](#errores)
 
@@ -30,8 +28,6 @@ Teniendo la posibilidad de realizar las siguiente opciones.
 
 #### GUI (Screenshots)
 Para usar la Interfaz grafica, primero debe ingresar el usuario en el recuadro requerido, para luego acceder a la parte de administración, esto dependera si tu usuario es Administrador, solo si esto fuera cierto,accederia al menú correspondiente al Administrador.
-![GUI Screenshot del programa en ejecución](Images/GPgui1.png)
-![GUI Screenshot del programa en ejecución](Images/GPgui2.png)
 ### Web:
 A diferencia de las anteriores  formas de uso, la aplicación web aun no se a completado pero se espera que pronto lo este, en comparacion con las otras versiones esta se ejecutara en el navegador y se conectara a una base de datos local para su uso.
 ### APK (Android):
@@ -44,7 +40,6 @@ Para usar el software tenemos que hacer lo siguiente si tenemos git instalado pe
 git clone https://github.com/JorgeArguello1999/Gestor_Productos.git
 cd Gestor_Productos
 ```
-Modificar el archivo `db_connect.py` y usarlo inicando el .bat o el ejecutable para Linux. 
 ## Importante
 Si desea desarrollar o ejecutar las ultimas versiones de *Gestor de Productos*, considere lo siguiente:
 
@@ -74,134 +69,21 @@ Crear ejecutable (Dependiendo el Sistema Operativo compilara un .EXE o un .DMG)
 pyinstaller --clean --onefile --windowed archivo.py #CLI o GUI
 ```
 
-## Docker
-El uso de docker es el plan original, usarlo con una instancia, con un volumen permanente para tener una base de datos portable y que el programa pueda ser escalable a futuro
-
-```bash
-# Debian
-sudo apt install docker
-
-# Arch 
-sudo pacman -Sy docker
-
-# Windows 
-Para el caso de Windows descargarlo desde su pagina oficial
-```
-Para usar docker realizar los siguientes comandos:
-
-/*Esto se encuentra provisional hasta crear una imagen propia para la aplicación*/ 
-
-```bash
-#!/bin/bash
-
-echo "Elije el Gestor de Base de Datos que desees usar: "
-echo "MariaDB: 1"
-echo "MySQL: 2"
-read -p "Elección: " eleccion
-
-if [[ $eleccion -eq 1 ]]
-then
-	echo "MariaDB"
-	# MariaDB
-	docker run -v ~/personal/Gestor_Productos/basededatos/docker_Mariadb_DB:/var/lib/mysql -p 3306:3306 --name gestor_productos --env MARIADB_USER=jorge --env MARIADB_PASSWORD=basededatos -d --env MARIADB_ROOT_PASSWORD=root mariadb
-
-	# EXEC
-	docker exec -it gestor_productos mysql -u jorge -p
-
-else
-	echo "MySQL"
-	# MySQL
-	docker run -v ~/personal/Gestor_Productos/basededatos/docker_MySQL_DB:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 --name gestor_productos -d mysql
-
-	# EXEC
-	docker exec -it gestor_productos mysql -u root -p
-
-fi
-
-echo "------------------------------------------------------------------------"
-
-```
-
-## Creación de la Base de datos 
-Para crear la Base de datos necesitaremos MariaDB o en su defecto MySQL 4.04 en adelante. Esto se recomienda ya que se usa el cifrado AES que esta disponible desde la versión 4.04 en adelante en el gestor de Base de Datos MySQL y MariaDB, ingrese los siguientes comandos dentro de la consola de MariaDB.
-
-## Esquema de la Base de Datos
-Base de datos= "aplicacion"
-Tablas:
-
- - **productos**
-     - **id** (INT 11 NOT NULL PRIMARY KEY AUTOINCREMENT)
-     -  **nombre** (VARCHAR 30)
-     - **cantidad** (INT 11)
-     - **precio** (FLOAT)
-     - **foto_producto** (BLOB) Imágenes del Producto
-  - **usuarios**
-       - **id_usuario** (INT NOT NULL PRIMARY KEY AUTOINCREMENT)
-       - **usuario** (VARCHAR 20 NOT NULL) 
-       - **clave** (VARCHAR 50 NOT NULL)
-       - **area** (VARCHAR 50 NOT NULL) *Acepta valores "admin, cajero, bodega"*
-       - **foto_usuarios** (BLOB) Imágenes del Usuario
-
-Como debería verse las tablas creadas:
-```
-MariaDB [aplicacion]> DESCRIBE productos;
-+---------------+-------------+------+-----+---------+----------------+
-| Field         | Type        | Null | Key | Default | Extra          |
-+---------------+-------------+------+-----+---------+----------------+
-| id            | int(11)     | NO   | PRI | NULL    | auto_increment |
-| nombre        | varchar(30) | YES  |     | NULL    |                |
-| cantidad      | int(11)     | YES  |     | NULL    |                |
-| precio        | float       | YES  |     | NULL    |                |
-| foto_producto | blob        | YES  |     | NULL    |                |
-+---------------+-------------+------+-----+---------+----------------+
-
-MariaDB [aplicacion]> DESCRIBE usuarios;
-+--------------+-------------+------+-----+---------+----------------+
-| Field        | Type        | Null | Key | Default | Extra          |
-+--------------+-------------+------+-----+---------+----------------+
-| id_usuario   | int(11)     | NO   | PRI | NULL    | auto_increment |
-| usuario      | varchar(20) | NO   |     | NULL    |                |
-| clave        | varchar(50) | NO   |     | NULL    |                |
-| area         | varchar(50) | NO   |     | NULL    |                |
-| foto_usuario | blob        | YES  |     | NULL    |                |
-+--------------+-------------+------+-----+---------+----------------+
-
-```
 ## Consejos para el desarrollo
-<< Especifica el tipo de commit >>
+### Especifica el tipo de commit 
+ - **feat:** La nueva característica que agregas a una aplicación en particular 
+ - **fix:** Un parche para un error
+ - **style:** Características o actualizaciones relacionadas con estilos
+ - **refactor:** Refactorizar una sección específica de la base de código
+ - **test:** Todo lo relacionado con pruebas
+ - **docs:** Todo lo relacionado con documentación
+ - **chore:** Mantenimiento de código regular.
 
->> feat: 
--> La nueva característica que agregas a una aplicación en particular
-
->> fix: 
--> Un parche para un error
-
->> style: 
--> Características o actualizaciones relacionadas con estilos
-
->> refactor: 
--> Refactorizar una sección específica de la base de código
-
->> test: 
--> Todo lo relacionado con pruebas
-
->> docs:
--> Todo lo relacionado con documentación
-
->> chore: 
--> Mantenimiento de código regular.
-
-- Separa el título del cuerpo del mensaje con una línea en blanco.
-- Tu mensaje de commit no debería contener ningún mensaje de espacios en blanco.
-- Quita signos de puntuación innecesarios.
-- No termines el título con un punto.
-- Usa mayúsculas al inicio del título y por cada párrafo del cuerpo del mensaje.
-- Usa el modo imperativo en el título.
-- Usa el cuerpo del mensaje para explicar cuáles cambios has hecho y por qué los hiciste.
-- No asumas que las personas que revisará el código entiende cuál era el problema original, asegúrate de agregar la información necesaria.
-- No piense que tu código se explica solo.
+No termines el título con un punto. Usa mayúsculas al inicio del título y por cada párrafo del cuerpo del mensaje. Usa el modo imperativo en el título. Usa el cuerpo del mensaje para explicar cuáles cambios has hecho y por qué los hiciste. No asumas que las personas que revisará el código entiende cuál era el problema original, asegúrate de agregar la información necesaria. No piense que tu código se explica solo.
 
 ## Configuración de Python
+> Provisional hasta crear la API 
+
 Para configurar la conexión con base de datos debemos configurar el archivo `db_connect.py`, este archivo contiene la configuración para la base de datos, el usuario y las credenciales para acceder a la misma
 
 ```python
@@ -212,8 +94,8 @@ Para configurar la conexión con base de datos debemos configurar el archivo `db
         # Verificacion de usuario
         def __init__(self):
             self.conn = mariadb.connect(
-                user="jorge", # Aqui colocamos el usuario para la base de datos
-                password="basededatos", # Contraseña para la misma
+                user="root", # Aqui colocamos el usuario para la base de datos
+                password="root", # Contraseña para la misma
                 host="192.168.1.8", # El lugar de la base de datos localhost=127.0.0.1 o alguna otra.
                 database="aplicacion" # Nombre de la base de Datos a usar.
                 )
