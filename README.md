@@ -49,19 +49,16 @@ Para desarrollar la GUI necesitas instalar **PyQt5** usando el siguiente comando
 Para desarrollar la aplicación usted necesitara disponer de las siguientes aplicaciones en su computador u ordenador:
  - **Base de Datos**
      - **MariaDB** 
-     - **MySQL** 
      - **SQLite** (Opcional solo para android en caso de no existir un servidor principal)
  - **Conectores y QtDesigner**
      - **mariadb** (Conector de MariaDB con Python)
      - **PyInstaller** (Crear ejecutables de la apliación)
      - **PyQt5** (Conjunto de librearias Qt para desarrollo)
      - **PyQt5-tools** (Herramienta gráfica para desarrollo del entorno gráfico Qt)
-     - **pymysql** (Conector de MySQL con Python)
-
 
 Instalación de conectores mediante PIP (Gestor de paquetes de Python)
 ```bash
-pip install mariadb pymysql pyqt5 pyqt5-tools
+pip install mariadb pyqt5 pyqt5-tools
 ```
 
 Crear ejecutable (Dependiendo el Sistema Operativo compilara un .EXE o un .DMG)
@@ -88,7 +85,6 @@ Para configurar la conexión con base de datos debemos configurar el archivo `db
 
 ```python
     import mariadb as database # Este es el modulo de conexión (MariaDB)
-    import pymysql as database # Modulo en caso de ser MySQL
     
     class Conexion:
         # Verificacion de usuario
