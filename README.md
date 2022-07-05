@@ -14,11 +14,11 @@
 */Actualmente esta es la versión 2.1, se han corregido la mayor parte de problemas para crear una base fuerte la cual permita añadir funcionalidades a futuro/*
 
 Una herramienta destinada al manejo de productos y mercancía de forma sencilla y fácil, orientada a personas sin conocimientos en informática. Creada con el principal objetivo de poder utilizarse en casi cualquier dispositivo. 
-Teniendo el software en tres presentaciones **CLI**,  **GUI**, **Web** y **APK**, con la finalidad de poder tener un control amplio de sus productos y mercancía.
+Teniendo el software en tres presentaciones **GUI**, **Web** y **APK**, con la finalidad de poder tener un control amplio de sus productos y mercancía.
 ## Forma de Uso
-### CLI, GUI y APK (Aplicación Movil):
+### WEB, GUI y APK (Aplicación Movil):
 **Esta forma de uso esta disponible en caso de que se use desde el código fuente** 
-Para usar el CLI debemos ejecutar el comando ` python3 cli.py ` o ejecutar `python3 splash.py` para la versión GUI. Posteriormente nos pedirá que ingresemos el usuario y contraseña esto se configuro en la INSTALACIÓN por defecto tenemos que esta es "Juan" y la contraseña es "Pilancho".
+Para usar o ejecutar `python3 splash.py` para la versión GUI. Posteriormente nos pedirá que ingresemos el usuario y contraseña esto se configuro en la INSTALACIÓN por defecto tenemos que esta es "Juan" y la contraseña es "Pilancho".
 Teniendo la posibilidad de realizar las siguiente opciones.
 
  1. Listar Artículos
@@ -63,11 +63,11 @@ pip install mariadb pyqt5 pyqt5-tools
 
 Crear ejecutable (Dependiendo el Sistema Operativo compilara un .EXE o un .DMG)
 ```
-pyinstaller --clean --onefile --windowed archivo.py #CLI o GUI
+pyinstaller --clean --onefile --windowed archivo.py #GUI
 ```
 
-## Consejos para el desarrollo
-### Especifica el tipo de commit 
+# Consejos para el desarrollo
+## Especifica el tipo de commit 
  - **feat:** La nueva característica que agregas a una aplicación en particular 
  - **fix:** Un parche para un error
  - **style:** Características o actualizaciones relacionadas con estilos

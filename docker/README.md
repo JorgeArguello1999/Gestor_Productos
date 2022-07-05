@@ -74,7 +74,7 @@ CREATE TABLE clientes(
     nombres VARCHAR(20) NOT NULL, 
     apellidos VARCHAR(20) NOT NULL, 
     cedula INT NOT NULL,
-    correo VARCHAR(20) NOT NULL,
+    correo VARCHAR(50) NOT NULL,
     direccion VARCHAR(20)NOT NULL,
     telefono INT NOT NULL) 
     ENGINE= 'InnoDB' DEFAULT CHAR SET= latin1;
@@ -88,7 +88,7 @@ CREATE TABLE clientes(
 | nombres   | varchar(20) | NO   |     | NULL    |                |
 | apellidos | varchar(20) | NO   |     | NULL    |                |
 | cedula    | int(11)     | NO   |     | NULL    |                |
-| correo    | varchar(20) | NO   |     | NULL    |                |
+| correo    | varchar(50) | NO   |     | NULL    |                |
 | direccion | varchar(20) | NO   |     | NULL    |                |
 | telefono  | int(11)     | NO   |     | NULL    |                |
 +-----------+-------------+------+-----+---------+----------------+
@@ -101,7 +101,7 @@ CREATE TABLE trabajadores(
     nombres VARCHAR(20) NOT NULL, 
     apellidos VARCHAR(20) NOT NULL, 
     cedula INT NOT NULL,
-    correo VARCHAR(20) NOT NULL,
+    correo VARCHAR(50) NOT NULL,
     direccion VARCHAR(20)NOT NULL,
     telefono INT NOT NULL,
     area VARCHAR(20) NOT NULL,
@@ -117,7 +117,7 @@ CREATE TABLE trabajadores(
 | nombres         | varchar(20) | NO   |     | NULL    |                |
 | apellidos       | varchar(20) | NO   |     | NULL    |                |
 | cedula          | int(11)     | NO   |     | NULL    |                |
-| correo          | varchar(20) | NO   |     | NULL    |                |
+| correo          | varchar(50) | NO   |     | NULL    |                |
 | direccion       | varchar(20) | NO   |     | NULL    |                |
 | telefono        | int(11)     | NO   |     | NULL    |                |
 | area            | varchar(20) | NO   |     | NULL    |                |

@@ -1,32 +1,18 @@
 {
-  "name": "backend",
+  "name": "api-mysql",
   "version": "1.0.0",
-  "description": "Backend developer in NodeJS with Express",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JorgeArguello1999/Gestor_Productos.git"
-  },
-  "keywords": [
-    "Backend",
-    "NodeJS",
-    "Express",
-    "Gestor_Productos"
-  ],
-  "author": "JorgeArguello1999",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/JorgeArguello1999/Gestor_Productos/issues"
-  },
-  "homepage": "https://github.com/JorgeArguello1999/Gestor_Productos#readme",
   "dependencies": {
-    "ejs": "^3.1.8",
     "express": "^4.18.1",
+    "mariadb": "^3.0.0",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.18",
-    "underscore": "^1.13.4"
+    "nodemon": "^2.0.19"
   }
 }
