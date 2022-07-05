@@ -13,11 +13,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 // Seteamos configuraciones de Express
-app.set('port', 3000);
+app.set('port', 3000); 
 
-app.get('/', (req, res) => {
-	res.send("Hola");
-});
+// Para la pagina principal
+app.use('',require('./routes/index'));
+
+// Para la parte de la API
+app.use('/api/movies', require('./routes/movies'));
 
 app.listen(app.get('port'),() => {
 	console.log(`listen on port: ${app.get('port')}`);
