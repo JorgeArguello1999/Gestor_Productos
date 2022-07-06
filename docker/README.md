@@ -1,5 +1,8 @@
 # Docker 
-Así funciona el script para Docker
+> Se recomienda usar MySQL
+En caso de querer usar MariaDB por favor modifique la API 
+
+Así funciona el script para Docker.
 ```bash
 #!/bin/bash
 
