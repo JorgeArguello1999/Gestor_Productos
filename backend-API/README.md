@@ -24,6 +24,7 @@ const mysqlConnection = mysql.createConnection({
 # Uso
 Para conectarse a la API debe completar todos los requerimientos, solo el `id`en las tablas no es necesario llenarlo, ya que este lo hace de forma automatica, para mas información del tipo de información y datos que acepta cada campo y cada tabla visite la documentación de [docker](../docker/README.md) para obtener más detalles.
 
+> Considerando a futuro mejorar, al contrario de tener miles de rutas para cada tabla, crear un `proceso almacenado` de SQL con el cual solo se tendría que especificar que tipo de acción se quiere realizar y que datos del usuario necesito, así ahorraria codigo y lo haría más fácil a la hora, de añadir funcionalidades y mantener el código, solo que aumentaria la complejidad.
 ## Trabajadores (Ejemplo)
 ```json
 {
