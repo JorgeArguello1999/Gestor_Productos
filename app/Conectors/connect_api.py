@@ -10,16 +10,19 @@ class conexion:
 class trabajadores(conexion):
     def listar(self):
         response = requests.get(self.API+"/trabajadores/")
-        response = response.json()
+        # No tocar, funcion y eso es lo importante
+        seteado = json.loads(response.text)
+        print(seteado)
 
-        '''
-        for i in response:
-            print(i, ":", response[i], '\n')
-        '''
+    def buscar(self, id):
+        id = str(id)
+        response = requests.get(self.API+"/trabajadores/"+id)
+        seteado = json.loads(response.text)
+        print(seteado)
 
-        for i in response:
-            print(response)
+
 
 if __name__=='__main__':
     tra= trabajadores()
-    tra.listar()
+    # tra.listar()
+    tra.buscar(3)
