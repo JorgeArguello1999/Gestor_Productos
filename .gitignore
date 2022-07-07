@@ -1,2 +1,3 @@
-docker/
+docker/basededatos/
 backend-API/node_modules/
+__pycache__
