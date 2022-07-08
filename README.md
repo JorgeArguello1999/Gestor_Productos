@@ -79,22 +79,13 @@ pyinstaller --clean --onefile --windowed archivo.py #GUI
 No termines el título con un punto. Usa mayúsculas al inicio del título y por cada párrafo del cuerpo del mensaje. Usa el modo imperativo en el título. Usa el cuerpo del mensaje para explicar cuáles cambios has hecho y por qué los hiciste. No asumas que las personas que revisará el código entiende cuál era el problema original, asegúrate de agregar la información necesaria. No piense que tu código se explica solo.
 
 ## Configuración de Python
-> Provisional hasta crear la API 
+Para configurar la conexión con base de datos debemos configurar el archivo `app/Conectors/init.py`, este archivo contiene la configuración para la base de datos, el usuario y las credenciales para acceder a la misma
 
-Para configurar la conexión con base de datos debemos configurar el archivo `db_connect.py`, este archivo contiene la configuración para la base de datos, el usuario y las credenciales para acceder a la misma
-
-```python
-    import mariadb as database # Este es el modulo de conexión (MariaDB)
-    
-    class Conexion:
-        # Verificacion de usuario
-        def __init__(self):
-            self.conn = mariadb.connect(
-                user="root", # Aqui colocamos el usuario para la base de datos
-                password="root", # Contraseña para la misma
-                host="192.168.1.8", # El lugar de la base de datos localhost=127.0.0.1 o alguna otra.
-                database="aplicacion" # Nombre de la base de Datos a usar.
-                )
+````python
+class conexion:
+    API = "http://localhost:3000/api" # Aqui se debe modificar en caso de trabajar con un servidor remoto
+    def __init__(self):
+        print("Modulo conectado")
 ```
 # Errores
 
