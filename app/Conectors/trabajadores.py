@@ -6,26 +6,15 @@ class trabajadores(init.conexion):
     def __init__(self):
         global URL
         URL = self.API+"/trabajadores/"
-
-    def maquetador(self, response):
-        for valor in response:
-            print("-------------------------------------------------------------------------------------")
-            print("Id : ", valor['id'])
-            print("Nombres : ", valor['nombres'], ": ")
-            print("Apellidos: ", valor['apellidos'], ": ")
-            print("Cedula: ", valor['cedula'], ": ")
-            print("Correo: ", valor['correo'], ": ")
-            print("Direccion: ", valor['direccion'], ": ")
-            print("Telefono: ", valor['telefono'], ": ")
-            print("Area: ", valor['area'], ": ")
-            print("Foto: ", valor['foto_trabajador'], ": ")
-            print("-------------------------------------------------------------------------------------")
-        return response 
+        maquetador = init.conexion()
 
     def login(self, correo, cedula):
         response = requests.get(URL)
         seteado = json.loads(response.text)
         for valor in seteado:
+            if valor['correo']==correo and valor['cedula']==cedula and valor['area']=='admin' and valor['area']=='ADMIN':
+                print('Admin')
+                return 'admin' 
             if valor['correo']==correo and valor['cedula']==cedula:
                 print('Existe')
                 return True
@@ -37,9 +26,8 @@ class trabajadores(init.conexion):
     def listar(self):
         response = requests.get(URL)
         seteado = json.loads(response.text)
-        self.maquetador(seteado)
+        self.maquetador.maquetador(seteado)
         
-
     def buscar(self, id):
         try:
             response = requests.get(URL+str(id))
@@ -47,13 +35,16 @@ class trabajadores(init.conexion):
             # if seteado['cedula']==cedula:
             salida = seteado['nombres']
             print(salida)
-            return 
+            return salida 
         except:
             print('ID no existen')
             return False
 
+    def insertar(self, datos): # Aqui de entrada debe ser un array
+        pass
+
 if __name__=='__main__':
     trab = trabajadores()
-    # trab.listar()
+    trab.listar()
     trab.buscar(1)
-    trab.login('joe.arguello2008@gmail.com', 160100)
+    trab.login('jorge.arguello1999@gmail.com', 1600644353)
