@@ -18,13 +18,16 @@ Teniendo el software en tres presentaciones **GUI**, **Web** y **APK**, con la f
 ## Forma de Uso
 ### WEB, GUI y APK (Aplicación Movil):
 **Esta forma de uso esta disponible en caso de que se use desde el código fuente** 
-Para usar o ejecutar `python3 splash.py` para la versión GUI. Posteriormente nos pedirá que ingresemos el usuario y contraseña esto se configuro en la INSTALACIÓN por defecto tenemos que esta es "Juan" y la contraseña es "Pilancho".
+Para usar debemos ejecutar el siguiente comando o archivo: 
+> ```python3 splash.py```
+
+Posteriormente nos pedirá que ingresemos el usuario y contraseña esto se configuro en la INSTALACIÓN por defecto tenemos que esta es "Juan" y la contraseña es "Pilancho".
 Teniendo la posibilidad de realizar las siguiente opciones.
 
- 1. Listar Artículos
- 2. Insertar Artículos
- 3. Editar Artículos
- 4. Eliminar Artículos
+  - Manejar Clientes -> Admin
+  - Manejar Trabajadores -> Admin
+  - Manejar Facturas -> Trabajadores (Cajero)
+  - Manejar Productos -> Trabajadores (Bodega)
 
 #### GUI (Screenshots)
 Para usar la Interfaz grafica, primero debe ingresar el usuario en el recuadro requerido, para luego acceder a la parte de administración, esto dependera si tu usuario es Administrador, solo si esto fuera cierto,accederia al menú correspondiente al Administrador.
@@ -81,7 +84,7 @@ No termines el título con un punto. Usa mayúsculas al inicio del título y por
 ## Configuración de Python
 Para configurar la conexión con base de datos debemos configurar el archivo `app/Conectors/init.py`, este archivo contiene la configuración para la base de datos, el usuario y las credenciales para acceder a la misma
 
-````python
+```python
 class conexion:
     API = "http://localhost:3000/api" # Aqui se debe modificar en caso de trabajar con un servidor remoto
     def __init__(self):

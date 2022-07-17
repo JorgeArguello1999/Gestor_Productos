@@ -13,7 +13,7 @@ En la carpeta `src/` existe un subdirectorio con el nombre `database.js` en el c
 const mysql = require('mysql2');
 
 const mysqlConnection = mysql.createConnection({
-  host: '192.168.1.13', // Direccion IP del servidor
+  host: 'localhost', // Direccion IP del servidor
   user: 'root', // Usuario de la base de datos
   database: 'aplicacion', //base de datos
   password: 'root', // Contraseña
@@ -35,9 +35,9 @@ Para conectarse a la API debe completar todos los requerimientos, solo el `id`en
     "correo":"jorge.arguello1999@gmail.com",
     "direccion":"Dorado",
     "telefono":989402524,
-    "area":"admin",
+    "area":"admin", // Admin, Cajero o Bodega.
     "foto_trabajador":null //Aqui se coloca una fotografia
-    }
+}
 ```
 
 # Docker 
