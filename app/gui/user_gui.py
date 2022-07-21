@@ -1,4 +1,5 @@
-import Conectors.db_connect as db_connect
+# import Conectors.db_connect as db_connect
+import Conectors.trabajadores as trabajadores
 import sys
 import time
 
@@ -8,8 +9,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QApplication, QLineEdit
 
 class interface(QMainWindow):
-    user= db_connect.usuarios()
-    productos= db_connect.productos()
+    # productos= db_connect.productos()
 
     def __init__(self):
         super().__init__()
@@ -23,8 +23,6 @@ class interface(QMainWindow):
         self.tabla_productos.setColumnWidth(1,200)
         self.tabla_productos.setColumnWidth(2,70)
         self.tabla_productos.setColumnWidth(3,60)
-        # Boton Login
-        self.boton_registro.clicked.connect(self.login)
 
     def cargador_tabla_componentes(self):
         """
@@ -93,23 +91,6 @@ class interface(QMainWindow):
     Desde aquí comienzan las funciones de los botones
     --> Parte logica
     """
-    # Funcion del Boton de Login
-    def login(self):
-        usuario= self.entrada_usuario.text()
-        password= self.entrada_contrasena.text()
-        respuesta= self.user.verificador(usuario, password)
-        if respuesta==True:
-            self.frame_Listar.setEnabled(True)
-            self.frame_Opciones.setEnabled(True)
-            validacion= "[Autorizado]"
-            # Inicamos el componente
-            self.cargador_tabla_componentes()
-            self.menu_opciones()
-            # Llamamos al come procesador
-        else:
-            validacion= "[No Autorizado]" 
-        self.comprobador.setText(validacion)
-
     # Boton de seleccionar
     def seleccionar(self):
         try: 

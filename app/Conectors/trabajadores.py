@@ -1,9 +1,8 @@
-import init
+import Conectors.init as init
 import requests
 import json
 
 class trabajadores(init.conexion):
-
     def __init__(self):
         global URL
         URL = self.API+"/trabajadores/"
@@ -79,13 +78,14 @@ class trabajadores(init.conexion):
             return False
 
     def eliminar(self, id):
-        if self.buscar(id):
-            response = requests.delete(URL+str(id))
-            print('Funciona')
-            return True
-
-        print('No Existe el ID')
-        return False
+        try:
+            if self.buscar(id):
+                response = requests.delete(URL+str(id))
+                print('Funciona')
+                return True
+        except: 
+            print('No Existe el ID')
+            return False
 
 if __name__=='__main__':
     trab = trabajadores()
@@ -94,4 +94,4 @@ if __name__=='__main__':
     # trab.login('jorge.arguello1999@gmail.com', 1600644353)
     # post = ['Juan Andres', 'Pilancho Paredes', 160100, 'juanpilancho@gmail.com', 'Shell', 987578898, 'bodega', 110]
     # trab.insertar(post)
-    trab.eliminar(1)
+    # trab.eliminar(1)
