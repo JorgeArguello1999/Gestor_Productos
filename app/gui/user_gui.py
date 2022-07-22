@@ -1,7 +1,9 @@
-# import Conectors.db_connect as db_connect
-import Conectors.trabajadores as trabajadores
+# Modulo del Sistema
 import sys
 import time
+
+# Modulo de Conexion
+import Conectors.productos as productos
 
 # Modulos de Qt5
 from PyQt5 import uic
@@ -9,35 +11,37 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QApplication, QLineEdit
 
 class interface(QMainWindow):
-    # productos= db_connect.productos()
+    producto = productos.productos()
 
     def __init__(self):
         super().__init__()
         # Cargamos el XML de Qt
         uic.loadUi("gui/user_gui.ui", self)
-        # Deshabilitamos los frames antes del login
-        self.frame_Listar.setEnabled(False)
-        self.frame_Opciones.setEnabled(False)
         # Modificamos los tamaños de la tabla
         self.tabla_productos.setColumnWidth(0,50)
         self.tabla_productos.setColumnWidth(1,200)
         self.tabla_productos.setColumnWidth(2,70)
         self.tabla_productos.setColumnWidth(3,60)
+        self.cargador_tabla_componentes()
 
     def cargador_tabla_componentes(self):
         """
         Por cada llamado a la funcion la variable productos almacena nuevos datos
         si la llamamos como propiedad de clase, esta no almacena los nuevos datos.
         """
-        productos= db_connect.productos()
-        productos= productos.listar()
+        # productos= db_connect.productos()
+        produ= productos.productos()
+        produ= produ.listar()
         fila=0
-        self.tabla_productos.setRowCount(len(productos))
-        for individual in productos:
-            self.tabla_productos.setItem(fila, 0, QtWidgets.QTableWidgetItem(str(individual[0])))
-            self.tabla_productos.setItem(fila, 1, QtWidgets.QTableWidgetItem(str(individual[1])))
-            self.tabla_productos.setItem(fila, 2, QtWidgets.QTableWidgetItem(str(individual[2])))
-            self.tabla_productos.setItem(fila, 3, QtWidgets.QTableWidgetItem(str(individual[3])))
+        self.tabla_productos.setRowCount(len(produ))
+        for individual in produ:
+            self.tabla_productos.setItem(fila, 0, QtWidgets.QTableWidgetItem(str(individual['id'])))
+            self.tabla_productos.setItem(fila, 1, QtWidgets.QTableWidgetItem(str(individual['nombre'])))
+            self.tabla_productos.setItem(fila, 2, QtWidgets.QTableWidgetItem(str(individual['cantidad'])))
+            self.tabla_productos.setItem(fila, 3, QtWidgets.QTableWidgetItem(str(individual['precio'])))
+            self.tabla_productos.setItem(fila, 4, QtWidgets.QTableWidgetItem(str(individual['valor_total'])))
+            print(individual)
+            print(individual['nombre'])
             fila=fila+1
         # Cargamos la seleccion
         self.tabla_productos.cellClicked.connect(self.eleccion_producto)
@@ -93,7 +97,7 @@ class interface(QMainWindow):
     """
     # Boton de seleccionar
     def seleccionar(self):
-        try: 
+        try:
             global salida
             salida= self.productos.listar()
             for i in salida:
@@ -145,7 +149,14 @@ class interface(QMainWindow):
         except:
             self.mensaje_eliminar.setText("[Error ID no seleccionado]")
 
-app= QApplication(sys.argv)
-GUI= interface()
-GUI.show()
-sys.exit(app.exec_())
+if __name__=='__main__':
+    app= QApplication(sys.argv)
+    GUI= interface()
+    GUI.show()
+    sys.exit(app.exec_())
+
+else:
+    app= QApplication(sys.argv)
+    GUI= interface()
+    GUI.show()
+    sys.exit(app.exec_())

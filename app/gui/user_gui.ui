@@ -6,141 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>579</height>
+    <width>1080</width>
+    <height>749</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Gestor de Productos</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QFrame" name="frame_Registro">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>20</y>
-      <width>782</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>10</y>
-       <width>71</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Usuario:</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="entrada_usuario">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>10</y>
-       <width>113</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="boton_registro">
-     <property name="geometry">
-      <rect>
-       <x>470</x>
-       <y>10</y>
-       <width>80</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Registro</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_2">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>10</y>
-       <width>81</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Contraseña:</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="entrada_contrasena">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>10</y>
-       <width>113</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="echoMode">
-      <enum>QLineEdit::Password</enum>
-     </property>
-     <property name="readOnly">
-      <bool>false</bool>
-     </property>
-    </widget>
-    <widget class="QLabel" name="comprobador">
-     <property name="geometry">
-      <rect>
-       <x>590</x>
-       <y>10</y>
-       <width>111</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>[ No Autorizado ]</string>
-     </property>
-    </widget>
-    <widget class="Line" name="line_2">
-     <property name="geometry">
-      <rect>
-       <x>430</x>
-       <y>0</y>
-       <width>16</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>81</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>REGISTRO</string>
-    </property>
-   </widget>
    <widget class="QFrame" name="frame_Listar">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>100</y>
-      <width>421</width>
-      <height>401</height>
+      <y>50</y>
+      <width>531</width>
+      <height>551</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -154,8 +34,8 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>401</width>
-       <height>351</height>
+       <width>501</width>
+       <height>501</height>
       </rect>
      </property>
      <property name="editTriggers">
@@ -181,12 +61,17 @@
        <string>Precio</string>
       </property>
      </column>
+     <column>
+      <property name="text">
+       <string>Valor Total</string>
+      </property>
+     </column>
     </widget>
     <widget class="QLabel" name="mensaje_productos">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>370</y>
+       <x>20</x>
+       <y>520</y>
        <width>231</width>
        <height>16</height>
       </rect>
@@ -198,8 +83,8 @@
     <widget class="QPushButton" name="boton_productos">
      <property name="geometry">
       <rect>
-       <x>339</x>
-       <y>370</y>
+       <x>430</x>
+       <y>520</y>
        <width>71</width>
        <height>23</height>
       </rect>
@@ -211,8 +96,8 @@
     <widget class="QPushButton" name="seleccionar_productos">
      <property name="geometry">
       <rect>
-       <x>250</x>
-       <y>370</y>
+       <x>340</x>
+       <y>520</y>
        <width>80</width>
        <height>23</height>
       </rect>
@@ -226,7 +111,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>80</y>
+      <y>20</y>
       <width>131</width>
       <height>16</height>
      </rect>
@@ -241,8 +126,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>100</y>
+      <x>720</x>
+      <y>50</y>
       <width>341</width>
       <height>401</height>
      </rect>
@@ -677,8 +562,8 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>80</y>
+      <x>740</x>
+      <y>20</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -690,9 +575,9 @@
    <widget class="QLabel" name="label_18">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>510</y>
-      <width>771</width>
+      <x>0</x>
+      <y>680</y>
+      <width>1071</width>
       <height>41</height>
      </rect>
     </property>

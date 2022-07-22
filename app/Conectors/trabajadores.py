@@ -15,7 +15,7 @@ class trabajadores(init.conexion):
         for valor in seteado:
             if valor['correo']==correo and valor['cedula']==cedula and valor['area']=='admin' and valor['area']=='ADMIN':
                 print('Admin')
-                return 'admin' 
+                return 'admin'
             if valor['correo']==correo and valor['cedula']==cedula:
                 print('Existe')
                 return True
@@ -23,13 +23,12 @@ class trabajadores(init.conexion):
                 print('No Existe')
                 return False
 
-       
     def listar(self):
         response = requests.get(URL)
         seteado = json.loads(response.text)
         maquetador.maquetador(seteado)
         return True
-        
+
     def buscar(self, id):
         try:
             response = requests.get(URL+str(id))
@@ -83,7 +82,7 @@ class trabajadores(init.conexion):
                 response = requests.delete(URL+str(id))
                 print('Funciona')
                 return True
-        except: 
+        except:
             print('No Existe el ID')
             return False
 

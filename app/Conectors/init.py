@@ -17,6 +17,19 @@ class conexion:
             print("Area: ", valor['area'], ": ")
             print("Foto: ", valor['foto_trabajador'], ": ")
             print("-------------------------------------------------------------------------------------")
-        return response 
+        return response
+
+    def maquetador_productos(self, response):
+        for valor in response:
+            print("-------------------------------------------------------------------------------------")
+            print("Id : ", valor['id'])
+            print("Nombre : ", valor['nombre'], ": ")
+            print("Cantidad : ", valor['cantidad'], ": ")
+            print("Precio : ", valor['precio'], ": ")
+            print("Valor : ", valor['valor_total'], ": ")
+            print("Foto : ", valor['foto_producto'], ": ")
+            print("-------------------------------------------------------------------------------------")
+        return response
+
 
 
