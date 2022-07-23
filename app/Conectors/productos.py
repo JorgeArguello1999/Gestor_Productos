@@ -18,9 +18,8 @@ class productos(init.conexion):
         try:
             response = requests.get(URL+str(id))
             seteado = json.loads(response.text)
-            salida = seteado['nombre']+' '+seteado['precio']
-            print(str(salida))
-            return salida
+            maquetador.maquetador_productos(seteado)
+            return True
         except:
             print('ID no existen')
             return False
@@ -39,9 +38,10 @@ class productos(init.conexion):
         except:
             return False
 
-    def editar(self, datos):
+    def editar(self, ID, datos):
         try:
-            if self.buscar(id):
+            print(ID)
+            if self.buscar(ID):
                 data = dict(
                 nombre = datos[0],
                 cantidad = datos[1],
@@ -49,7 +49,7 @@ class productos(init.conexion):
                 valor_total = datos[3],
                 foto_producto = datos[4],
                 )
-                response = requests.put(URL+str(id), json=data)
+                response = requests.put(URL+str(ID), json=data)
                 return True
         except:
             print('No Existe el ID')

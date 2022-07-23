@@ -122,10 +122,7 @@ class interface(QMainWindow):
             precio= float(self.precio_insertar.text())
             valor_total = precio*cantidad
             foto= 'd'
-            # Evitamos que ingrese algo con el mismo nombre o mismo id
-            # self.productos.insertar(nombre, cantidad, precio)
             datos = [nombre, cantidad, precio, valor_total, foto]
-            print(datos)
             self.producto.insertar(datos)
             self.cargador_tabla_componentes()
             self.mensaje_insertar.setText("[ Realizado con Exito ]")
@@ -134,12 +131,17 @@ class interface(QMainWindow):
 
     def editar(self):
         try:
-            codigo= self.id_editar.text()
+            codigo= str(self.id_editar.text())
             nombre= str(self.nombreEntrada_editar.text())
             cantidad= int(self.cantidad_editar.text())
             precio= float(self.precio_editar.text())
-            self.productos.editar(codigo, nombre, cantidad, precio)
-            self.mensaje_editar.setText("[Realizado con Exito]")
+            valor_total = precio*cantidad
+            foto_producto= "d"
+            datos = [nombre, cantidad, precio, valor_total, foto_producto]
+            if self.producto.editar(codigo, datos):
+                self.mensaje_editar.setText("[Realizado con Exito]")
+            else:
+                print(codigo, "El id no existe hablo desde la GUI")
             self.cargador_tabla_componentes()
         except:
             self.mensaje_editar.setText("[Error 104]")
@@ -147,7 +149,7 @@ class interface(QMainWindow):
     def eliminar(self):
         try:
             codigo= self.id_editar.text()
-            self.productos.eliminar(codigo)
+            self.producto.eliminar(codigo)
             self.mensaje_eliminar.setText("[Borrado con Exito]")
             self.cargador_tabla_componentes()
         except:
