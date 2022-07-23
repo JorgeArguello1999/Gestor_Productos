@@ -50,8 +50,9 @@ router.post('/', (req, res) => {
 // Editar producto
 router.put('/:id', (req, res) => {
   const { nombre, cantidad, precio, valor_total, foto_producto } = req.body;
-  const query =`update productos set nombre=?, cantidad=?, precio=?, valor_total=?, foto_producto=?`;
-  mariadb.query(query, [nombre, cantidad, precio, valor_total, foto_producto], (err, rows, fields) => {
+  const { id } = req.params;
+  const query =`update productos set nombre=?, cantidad=?, precio=?, valor_total=?, foto_producto=? where id=?`;
+  mariadb.query(query, [nombre, cantidad, precio, valor_total, foto_producto, id], (err, rows, fields) => {
     if(!err){
       res.json('Producto Editado');
     }else{
