@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
 */
 router.post('/', (req, res) => {
   const { nombre, cantidad, precio, valor_total, foto_producto } = req.body;
-  const query = `insert into productos (nombre, cantidad, precio, valor_total, foto_producto) values (?, ?, ?, ?; ?)`;
+  const query = `insert into productos (nombre, cantidad, precio, valor_total, foto_producto) values (?, ?, ?, ?, ?)`;
   mariadb.query(query, [nombre, cantidad, precio, valor_total, foto_producto], (err, rows, fields) =>{
     if(!err){
       res.json('Producto Guardado');

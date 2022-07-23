@@ -22,6 +22,7 @@ class interface(QMainWindow):
         self.tabla_productos.setColumnWidth(2,70)
         self.tabla_productos.setColumnWidth(3,60)
         self.cargador_tabla_componentes()
+        self.menu_opciones()
 
     def cargador_tabla_componentes(self):
         """
@@ -113,17 +114,19 @@ class interface(QMainWindow):
         except:
             self.mensaje_productos.setText("[ID no seleccionado]")
 
-        salida = self.producto.listar()
-        print(salida)
-
     def insertar(self):
         # Obtenemos la entrada del usuario
         try:
             nombre= str(self.nombre_insertar.text())
             cantidad= int(self.cantidad_insertar.text())
             precio= float(self.precio_insertar.text())
+            valor_total = precio*cantidad
+            foto= 'd'
             # Evitamos que ingrese algo con el mismo nombre o mismo id
-            self.productos.insertar(nombre, cantidad, precio)
+            # self.productos.insertar(nombre, cantidad, precio)
+            datos = [nombre, cantidad, precio, valor_total, foto]
+            print(datos)
+            self.producto.insertar(datos)
             self.cargador_tabla_componentes()
             self.mensaje_insertar.setText("[ Realizado con Exito ]")
         except:
