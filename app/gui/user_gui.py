@@ -1,6 +1,5 @@
 # Modulo del Sistema
 import sys
-import time
 
 # Modulo de Conexion
 import Conectors.productos as productos
@@ -40,8 +39,6 @@ class interface(QMainWindow):
             self.tabla_productos.setItem(fila, 2, QtWidgets.QTableWidgetItem(str(individual['cantidad'])))
             self.tabla_productos.setItem(fila, 3, QtWidgets.QTableWidgetItem(str(individual['precio'])))
             self.tabla_productos.setItem(fila, 4, QtWidgets.QTableWidgetItem(str(individual['valor_total'])))
-            print(individual)
-            print(individual['nombre'])
             fila=fila+1
         # Cargamos la seleccion
         self.tabla_productos.cellClicked.connect(self.eleccion_producto)
@@ -58,7 +55,7 @@ class interface(QMainWindow):
             self.tabla_productos.selectRow(linea)
             self.mensaje_productos.setText("")
             print(f"Linea:{linea} ID:{codigoSeleccion}")
-            self.seleccionar()
+            self.seleccionar(codigoSeleccion)
             return codigoSeleccion
         except:
             self.mensaje_productos.setText("[Seleccione el ID del Producto]")
@@ -96,15 +93,16 @@ class interface(QMainWindow):
     --> Parte logica
     """
     # Boton de seleccionar
-    def seleccionar(self):
+    def seleccionar(self, id):
         try:
             global salida
-            salida= self.productos.listar()
-            for i in salida:
-                if i[0]==codigoSeleccion:
-                    codigo=str(i[0])
+            # salida= self.productos.listar()
+            salida = self.producto.listar()
+            for individual in salida:
+                if individual['id']==codigoSeleccion:
+                    codigo=str(individual['id'])
                     global nombreSeleccion
-                    nombreSeleccion=str(i[1])
+                    nombreSeleccion=str(individual['nombre'])
                     # Mostramos en la opcion de Editar
                     self.id_editar.setText(codigo)
                     self.nombre_editar.setText(nombreSeleccion)
@@ -114,6 +112,9 @@ class interface(QMainWindow):
                     return nombreSeleccion
         except:
             self.mensaje_productos.setText("[ID no seleccionado]")
+
+        salida = self.producto.listar()
+        print(salida)
 
     def insertar(self):
         # Obtenemos la entrada del usuario
