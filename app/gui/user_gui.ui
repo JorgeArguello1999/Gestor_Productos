@@ -34,7 +34,7 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>501</width>
+       <width>511</width>
        <height>501</height>
       </rect>
      </property>
@@ -209,11 +209,15 @@ color: black;</string>
      <widget class="QLineEdit" name="cantidad_insertar">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>30</y>
+        <x>80</x>
+        <y>40</y>
         <width>81</width>
         <height>23</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: black;
+background-color: white;</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_12">
@@ -237,6 +241,10 @@ color: black;</string>
         <width>91</width>
         <height>23</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: black;
+background-color: white;</string>
       </property>
      </widget>
      <widget class="QPushButton" name="boton_insertar">
@@ -355,6 +363,10 @@ color: black;</string>
         <height>23</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color: black;
+background-color: white;</string>
+      </property>
      </widget>
      <widget class="QLabel" name="label_16">
       <property name="geometry">
@@ -377,6 +389,10 @@ color: black;</string>
         <width>91</width>
         <height>23</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: black;
+background-color: white;</string>
       </property>
      </widget>
      <widget class="QPushButton" name="boton_editar">
@@ -439,6 +455,10 @@ color: black;</string>
         <width>113</width>
         <height>23</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: black;
+background-color: white;</string>
       </property>
      </widget>
      <widget class="QLabel" name="nombre_editar">
@@ -544,6 +564,10 @@ color: black;</string>
         <height>16</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color: black;
+background-color: white;</string>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -556,6 +580,10 @@ color: black;</string>
         <width>81</width>
         <height>16</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: black;
+background-color: white;</string>
       </property>
       <property name="text">
        <string/>
