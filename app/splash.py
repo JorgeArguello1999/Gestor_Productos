@@ -1,41 +1,69 @@
+# Modulo Tkinter
+from tkinter import *
+from tkinter import ttk as ttk
+from tkinter import messagebox as MessageBox
+
 # Modulo del Sistema
 import sys
 
 # Modulo de Conexion
-import Conectors.trabajadores as trabajadores 
+import Conectors.trabajadores as trabajadores
 
-# Modulos de Qt5
-from PyQt5 import uic
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QApplication, QLineEdit
+class splash:
+    root = Tk()
+    def createGUI(self):
+        # Titulo
+        self.root.title("Login Usuario")
 
-class splash(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        uic.loadUi('splash.ui', self)
-        self.ingresar.clicked.connect(self.login)
+        # mainFrame
+        mainFrame = Frame(self.root)
+        mainFrame.pack()
+        mainFrame.config(width=480,height=320)#,bg="lightblue")
 
-    def login(self):
+        # textos y titulos
+        titulo = Label(mainFrame,text="Gestor de Productos",font=("Arial",24))
+        titulo.grid(column=0,row=0,padx=10,pady=10,columnspan=2)
+
+        nombreLabel = Label(mainFrame,text="Correo: ")
+        nombreLabel.grid(column=0,row=1)
+        passLabel = Label(mainFrame,text="Contraseña: ")
+        passLabel.grid(column=0,row=2)
+
+        # entradas de texto
+        self.usuario = StringVar()
+        nombreEntry = Entry(mainFrame, textvariable=self.usuario)
+        nombreEntry.grid(column=1,row=1)
+
+        self.password = StringVar()
+        contraEntry = Entry(mainFrame,textvariable=self.password, show="*")
+        contraEntry.grid(column=1,row=2)
+
+        # botones
+        iniciarSesionButton = ttk.Button(mainFrame,text="Iniciar Sesion", command=self.iniciarSesion)
+        iniciarSesionButton.grid(column=1,row=3,ipadx=5,ipady=5,padx=10,pady=10)
+
+        # Iniciamos el mainloop
+        self.root.mainloop()
+
+    def iniciarSesion(self):
+        # Llamamos al modulo
         trabajador = trabajadores.trabajadores()
-        user = str(self.user.text())
-        password = int(self.password.text()) # Por el momento es la cedula
-
-        print(user, password)
-        print(type(user), type(password))
-
-        if trabajador.login(user, password)=='admin':
-            print('admin')
-            # import gui.user_gui
-
-        if trabajador.login(user, password):
-            # import gui.user_gui
-            print('trabajador')
+        respuesta =  trabajador.login(self.usuario.get(), self.password.get())
+        # Admin
+        if respuesta=='admin':
+            print(respuesta)
+            return 'admin' and exit()
+        # Trabajador
+        if respuesta:
+            print(respuesta)
+            import gui.user_gui
+            exit()
         else:
-            print('ni idea')
+            print(respuesta)
             exit()
 
-if __name__=='__main__':
-    app= QApplication(sys.argv)
-    GUI= splash()
-    GUI.show()
-    sys.exit(app.exec_())
+if __name__=="__main__":
+    app = splash()
+    app.createGUI()
+    user= 'joe.arguello2008@gmail.com'
+    password = int(1600611)

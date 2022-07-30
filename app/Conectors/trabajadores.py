@@ -16,9 +16,10 @@ class trabajadores(init.conexion):
     def login(self, correo, cedula):
         response = requests.get(URL+'login/'+str(cedula))
         seteado = json.loads(response.text)
+        if seteado['area']=='admin':
+            salida= 'admin'
+            return salida
         if seteado['correo']==str(correo):
-            if seteado['area']=='admin':
-                return 'admin'
             return True
         else:
             return False
@@ -91,6 +92,8 @@ if __name__=='__main__':
     # trab.listar()
     # trab.buscar(3)
     trab.login('joe.arguello2008@gmail.com', 1600611)
-    # post = ['Juan Andres', 'Pilancho Paredes', 160100, 'juanpilancho@gmail.com', 'Shell', 987578898, 'bodega', 110]
+    trab.login('juanpilancho@gmail.com', 160100)
+    trab.login('maestrotoasa@gmail.com', 12)
+    # post = ['Maestro', 'Toasa', 12, 'maestrotoasa@gmail.com', 'Shell', 987578898, 'admin', 110]
     # trab.insertar(post)
-    # trab.eliminar(1)
+    # trab.eliminar(4)
