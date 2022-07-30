@@ -66,4 +66,18 @@ router.delete('/:id', (req, res) => {
   });
 });
 
+// Login
+router.get('/login/:cedula',(req, res) => {
+  const { cedula } = req.params;
+  console.log('si funciono no preocupacion');
+  console.log(cedula)
+  mariadb.query('SELECT * FROM trabajadores WHERE cedula=?', [cedula], (err, rows) =>{
+    if (!err) {
+      res.json(rows[0]);
+    } else {
+      console.log(err);
+    }
+  });
+});
+
 module.exports = router;

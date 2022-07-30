@@ -1,4 +1,8 @@
-import Conectors.init as init
+try:
+    import Conectors.init as init
+except:
+    import init
+
 import requests
 import json
 
@@ -10,18 +14,14 @@ class trabajadores(init.conexion):
         maquetador = init.conexion()
 
     def login(self, correo, cedula):
-        response = requests.get(URL)
+        response = requests.get(URL+'login/'+str(cedula))
         seteado = json.loads(response.text)
-        for valor in seteado:
-            if valor['correo']==correo and valor['cedula']==cedula and valor['area']=='admin' and valor['area']=='ADMIN':
-                print('Admin')
+        if seteado['correo']==str(correo):
+            if seteado['area']=='admin':
                 return 'admin'
-            if valor['correo']==correo and valor['cedula']==cedula:
-                print('Existe')
-                return True
-            else:
-                print('No Existe')
-                return False
+            return True
+        else:
+            return False
 
     def listar(self):
         response = requests.get(URL)
@@ -35,14 +35,14 @@ class trabajadores(init.conexion):
             seteado = json.loads(response.text)
             salida = seteado['nombres']+' '+seteado['apellidos']
             print(str(salida))
-            return salida 
+            return salida
         except:
             print('ID no existen')
             return False
 
     def insertar(self, datos): # Aqui de entrada debe ser un array
         data = dict(
-            nombres = datos[0], 
+            nombres = datos[0],
             apellidos = datos[1],
             cedula = datos[2],
             correo = datos[3],
@@ -88,9 +88,9 @@ class trabajadores(init.conexion):
 
 if __name__=='__main__':
     trab = trabajadores()
-    trab.listar()
-    # trab.buscar(1)
-    # trab.login('jorge.arguello1999@gmail.com', 1600644353)
+    # trab.listar()
+    # trab.buscar(3)
+    trab.login('joe.arguello2008@gmail.com', 1600611)
     # post = ['Juan Andres', 'Pilancho Paredes', 160100, 'juanpilancho@gmail.com', 'Shell', 987578898, 'bodega', 110]
     # trab.insertar(post)
     # trab.eliminar(1)
